@@ -1437,7 +1437,7 @@ def generate_html(all_grades):
 
             # Planned Lexile info
             if pl:
-                panel += f'<div style="margin:16px 0;padding:12px;background:#f0f7ff;border-radius:6px;border-left:4px solid #3498db;">\n'
+                panel += f'<div style="margin:16px 0;padding:12px;background:#f0f7ff;border-radius:6px;border-left:4px solid #2979ff;">\n'
                 panel += f'<strong>Planned Lexile Range:</strong> {pl["range"]} (midpoint: {pl["midpoint"]}L)<br>\n'
                 panel += f'<strong>Scaffolded:</strong> Early {pl["early"]} → Mid {pl["mid"]} → Late {pl["late"]}<br>\n'
                 panel += f'<strong>Planned Word Count:</strong> {PLANNED_WORD_COUNTS.get(grade, "N/A")} per article\n'
@@ -1475,7 +1475,7 @@ def generate_html(all_grades):
 
             # Planned unit structure
             if cp["units"]:
-                panel += f'<h3 style="margin-top:16px;color:#2c3e50;">Planned Unit Structure</h3>\n'
+                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Planned Unit Structure</h3>\n'
                 panel += f'<ol class="unit-list">\n'
                 for u in cp["units"]:
                     panel += f'<li>{escape(u)}</li>\n'
@@ -1485,7 +1485,7 @@ def generate_html(all_grades):
 
             # Planned genre distribution
             if cp.get("genres"):
-                panel += f'<h3 style="margin-top:16px;color:#2c3e50;">Planned Genre Distribution</h3>\n'
+                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Planned Genre Distribution</h3>\n'
                 panel += f'<table class="data-table"><thead><tr><th>Genre</th><th>Count</th><th>% of Plan</th></tr></thead><tbody>\n'
                 for genre, count in sorted(cp["genres"].items(), key=lambda x: -x[1]):
                     gpct = count / cp["total"] * 100 if cp["total"] else 0
@@ -1494,7 +1494,7 @@ def generate_html(all_grades):
 
             # Missing texts from plan
             if xr["missing_from_qti"]:
-                panel += f'<h3 style="margin-top:16px;color:#2c3e50;">Planned Texts Missing from QTI ({len(xr["missing_from_qti"])})</h3>\n'
+                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Planned Texts Missing from QTI ({len(xr["missing_from_qti"])})</h3>\n'
                 panel += f'<p class="section-note">Published texts specified in the curriculum plan that are not found in the current QTI data.</p>\n'
                 panel += f'<details open><summary>Missing published texts ({len(xr["missing_from_qti"])})</summary>\n'
                 panel += f'<table class="data-table"><thead><tr><th>Title</th><th>Author</th><th>Type</th><th>Unit</th></tr></thead><tbody>\n'
@@ -1507,7 +1507,7 @@ def generate_html(all_grades):
 
             # Custom texts not yet written
             if xr["custom_not_yet_written"]:
-                panel += f'<h3 style="margin-top:16px;color:#2c3e50;">Custom Texts Not Yet Written ({len(xr["custom_not_yet_written"])})</h3>\n'
+                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Custom Texts Not Yet Written ({len(xr["custom_not_yet_written"])})</h3>\n'
                 panel += f'<p class="section-note">The plan calls for custom informational texts to be commissioned. These are not yet in the QTI data.</p>\n'
                 panel += f'<details><summary>Custom texts needed ({len(xr["custom_not_yet_written"])})</summary>\n'
                 panel += f'<table class="data-table"><thead><tr><th>Title</th><th>Unit</th><th>Notes</th></tr></thead><tbody>\n'
@@ -1519,7 +1519,7 @@ def generate_html(all_grades):
 
             # Extra QTI texts not in plan
             if xr["extra_in_qti"]:
-                panel += f'<h3 style="margin-top:16px;color:#2c3e50;">QTI Texts Not in Plan ({len(xr["extra_in_qti"])})</h3>\n'
+                panel += f'<h3 style="margin-top:16px;color:#1a237e;">QTI Texts Not in Plan ({len(xr["extra_in_qti"])})</h3>\n'
                 panel += f'<p class="section-note">Articles in current QTI data that are NOT in the curriculum plan.</p>\n'
                 panel += f'<details><summary>Extra QTI texts ({len(xr["extra_in_qti"])})</summary><ul class="title-list">\n'
                 for t in sorted(xr["extra_in_qti"])[:80]:
@@ -1544,8 +1544,8 @@ def generate_html(all_grades):
         panel += f'<h2>Literary vs. Informational Texts</h2>\n'
         panel += f'<p class="section-note">Literary = the text IS a literary work (poem, story, play, myth). '
         panel += f'Informational = everything else, including texts <em>about</em> literary works.</p>\n'
-        panel += pct_bar(m["literary_pct"], "#4a90d9", "Literary")
-        panel += pct_bar(m["informational_pct"], "#6c757d", "Info")
+        panel += pct_bar(m["literary_pct"], "#2979ff", "Literary")
+        panel += pct_bar(m["informational_pct"], "#e53935", "Info")
         panel += f'<table class="data-table"><thead><tr><th>Type</th><th>Count</th><th>Percentage</th></tr></thead><tbody>\n'
         panel += f'<tr><td>Literary</td><td>{m["literary_count"]}</td><td>{m["literary_pct"]:.1f}%</td></tr>\n'
         panel += f'<tr><td>Informational</td><td>{m["informational_count"]}</td><td>{m["informational_pct"]:.1f}%</td></tr>\n'
@@ -1575,9 +1575,9 @@ def generate_html(all_grades):
             panel += f'<p class="section-note">Checks whether assessments in literary units present the '
             panel += f'actual original literary work or a curriculum-written synopsis/retelling/educational article about it.</p>\n'
 
-            panel += pct_bar(orig_pct, "#28a745", "Original")
-            panel += pct_bar(hybrid_pct, "#e8853d", "Hybrid")
-            panel += pct_bar(syn_pct, "#dc3545", "Synopsis")
+            panel += pct_bar(orig_pct, "#43a047", "Original")
+            panel += pct_bar(hybrid_pct, "#ff9100", "Hybrid")
+            panel += pct_bar(syn_pct, "#e53935", "Synopsis")
 
             panel += f'<table class="data-table"><thead><tr><th>Classification</th><th>Count</th><th>Percentage</th><th>Description</th></tr></thead><tbody>\n'
             panel += f'<tr><td><strong>Original Text</strong></td><td>{orig_n}</td><td>{orig_pct:.1f}%</td>'
@@ -1606,8 +1606,8 @@ def generate_html(all_grades):
         panel += f'<div class="section-card">\n'
         panel += f'<h2>Excerpt vs. Non-Excerpt</h2>\n'
         panel += f'<p class="section-note">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>\n'
-        panel += pct_bar(m["excerpt_pct"], "#e8853d", "Excerpt")
-        panel += pct_bar(m["non_excerpt_pct"], "#5ba55b", "Complete")
+        panel += pct_bar(m["excerpt_pct"], "#e53935", "Excerpt")
+        panel += pct_bar(m["non_excerpt_pct"], "#2979ff", "Complete")
         panel += f'<table class="data-table"><thead><tr><th>Type</th><th>Count</th><th>Percentage</th></tr></thead><tbody>\n'
         panel += f'<tr><td>Excerpt</td><td>{m["excerpt_count"]}</td><td>{m["excerpt_pct"]:.1f}%</td></tr>\n'
         panel += f'<tr><td>Non-Excerpt</td><td>{m["non_excerpt_count"]}</td><td>{m["non_excerpt_pct"]:.1f}%</td></tr>\n'
@@ -1632,7 +1632,7 @@ def generate_html(all_grades):
         g = grade_band(grade)
 
         # --- RL Table ---
-        panel += f'<h3 style="margin-top:16px;color:#2c3e50;">RL — Reading Literature</h3>\n'
+        panel += f'<h3 style="margin-top:16px;color:#1a237e;">RL — Reading Literature</h3>\n'
         panel += f'<table class="data-table standards-table"><thead><tr>'
         panel += f'<th>Standard</th><th>Description</th><th>Questions</th><th>% of Questions</th><th>Assessments</th></tr></thead><tbody>\n'
 
@@ -1676,7 +1676,7 @@ def generate_html(all_grades):
         panel += f'</tbody></table>\n'
 
         # --- RI Table ---
-        panel += f'<h3 style="margin-top:20px;color:#2c3e50;">RI — Reading Informational Text</h3>\n'
+        panel += f'<h3 style="margin-top:20px;color:#1a237e;">RI — Reading Informational Text</h3>\n'
         panel += f'<table class="data-table standards-table"><thead><tr>'
         panel += f'<th>Standard</th><th>Description</th><th>Questions</th><th>% of Questions</th><th>Assessments</th></tr></thead><tbody>\n'
 
@@ -1726,7 +1726,7 @@ def generate_html(all_grades):
         panel += f'<p class="section-note">Ideal distribution: ~25% each for A, B, C, D.</p>\n'
 
         labels = ["A", "B", "C", "D"]
-        colors = ["#4a90d9", "#5ba55b", "#e8853d", "#d94a4a"]
+        colors = ["#2979ff", "#43a047", "#ff9100", "#e53935"]
         for i in range(4):
             count = m["answer_distribution"].get(i, 0)
             pct = (count / m["answer_total"] * 100) if m["answer_total"] else 0
@@ -1854,7 +1854,7 @@ def generate_html(all_grades):
             if not xr or not cp:
                 continue
 
-            match_color = "#28a745" if xr["match_rate"] > 50 else ("#e67e22" if xr["match_rate"] > 20 else "#dc3545")
+            match_color = "#43a047" if xr["match_rate"] > 50 else ("#ff6d00" if xr["match_rate"] > 20 else "#e53935")
             summary_html += f'<tr><td><strong>Grade {grade}</strong></td>'
             summary_html += f'<td>{cp["total"]}</td><td>{m["total_articles"]}</td>'
             summary_html += f'<td>{len(xr["found_in_qti"])}</td>'
@@ -1863,7 +1863,7 @@ def generate_html(all_grades):
             summary_html += f'<td style="color:#e67e22;">{len(xr["custom_not_yet_written"])}</td>'
             summary_html += f'<td>{len(xr["extra_in_qti"])}</td>'
             summary_html += f'<td>{len(cp["units"])}</td>'
-            summary_html += f'<td style="color:{"#dc3545" if m["num_units"] <= 1 else "#28a745"};">{m["num_units"]}</td>'
+            summary_html += f'<td style="color:{"#e53935" if m["num_units"] <= 1 else "#43a047"};">{m["num_units"]}</td>'
             summary_html += f'<td>{pl.get("range", "?")}</td></tr>\n'
 
         summary_html += '</tbody></table></div></div>\n'
@@ -1874,7 +1874,7 @@ def generate_html(all_grades):
     for grade in sorted(all_grades.keys()):
         m = all_grades[grade]
         summary_html += f'<div style="margin:12px 0;"><strong>Grade {grade}</strong><div style="display:flex;gap:4px;margin-top:4px;">'
-        for i, (label, color) in enumerate(zip(["A", "B", "C", "D"], ["#4a90d9", "#5ba55b", "#e8853d", "#d94a4a"])):
+        for i, (label, color) in enumerate(zip(["A", "B", "C", "D"], ["#2979ff", "#43a047", "#ff9100", "#e53935"])):
             pct = (m["answer_distribution"].get(i, 0) / m["answer_total"] * 100) if m["answer_total"] else 0
             summary_html += (
                 f'<div style="flex:1;text-align:center;">'
@@ -1927,12 +1927,12 @@ def generate_html(all_grades):
 * {{ margin: 0; padding: 0; box-sizing: border-box; }}
 body {{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f5f6fa;
-    color: #2d3436;
+    background: #eef2f7;
+    color: #1a1a2e;
     line-height: 1.6;
 }}
 .header {{
-    background: linear-gradient(135deg, #2c3e50, #3498db);
+    background: linear-gradient(135deg, #1a237e, #2979ff);
     color: white;
     padding: 24px 32px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
@@ -1963,8 +1963,8 @@ body {{
     transition: all 0.2s;
     white-space: nowrap;
 }}
-.tab-btn:hover {{ color: #3498db; background: #f8f9fa; }}
-.tab-btn.active {{ color: #3498db; border-bottom-color: #3498db; font-weight: 600; }}
+.tab-btn:hover {{ color: #2979ff; background: #e8f0fe; }}
+.tab-btn.active {{ color: #2979ff; border-bottom-color: #2979ff; font-weight: 600; }}
 .content {{ max-width: 1100px; margin: 0 auto; padding: 24px; }}
 .section-card {{
     background: #fff;
@@ -1998,9 +1998,9 @@ body {{
     background: #f8f9fa;
     border-radius: 8px;
 }}
-.stat-number {{ font-size: 28px; font-weight: 700; color: #3498db; }}
-.stat-label {{ font-size: 12px; color: #6c757d; margin-top: 4px; }}
-.warning-text {{ color: #e67e22 !important; }}
+.stat-number {{ font-size: 28px; font-weight: 700; color: #2979ff; }}
+.stat-label {{ font-size: 12px; color: #5f6368; margin-top: 4px; }}
+.warning-text {{ color: #ff6d00 !important; }}
 .data-table {{
     width: 100%;
     border-collapse: collapse;
@@ -2020,13 +2020,13 @@ body {{
     border-bottom: 1px solid #e9ecef;
 }}
 .data-table tbody tr:hover {{ background: #f8f9fa; }}
-.standards-table .std-none {{ background: #fce4e4; }}
-.standards-table .std-weak {{ background: #fef3cd; }}
+.standards-table .std-none {{ background: #ffcdd2; color: #b71c1c; }}
+.standards-table .std-weak {{ background: #fff3e0; color: #e65100; }}
 .standards-table .std-moderate {{ background: #fff; }}
-.standards-table .std-strong {{ background: #d4edda; }}
-.dev-bad {{ color: #dc3545; font-weight: 600; }}
-.dev-warn {{ color: #e67e22; font-weight: 500; }}
-.dev-ok {{ color: #28a745; }}
+.standards-table .std-strong {{ background: #e0f2f1; color: #004d40; }}
+.dev-bad {{ color: #e53935; font-weight: 600; }}
+.dev-warn {{ color: #ff6d00; font-weight: 500; }}
+.dev-ok {{ color: #2e7d32; }}
 .alert {{
     padding: 12px 16px;
     border-radius: 6px;
@@ -2034,28 +2034,28 @@ body {{
     font-size: 14px;
     font-weight: 500;
 }}
-.alert-danger {{ background: #fce4e4; color: #c0392b; border-left: 4px solid #e74c3c; }}
-.alert-success {{ background: #d4edda; color: #155724; border-left: 4px solid #28a745; }}
-.severity-high {{ color: #c0392b; font-weight: 700; }}
-.severity-middle {{ color: #e67e22; font-weight: 600; }}
-.status-used {{ color: #6c757d; }}
-.status-unused {{ color: #c0392b; font-weight: 600; }}
+.alert-danger {{ background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }}
+.alert-success {{ background: #e8f5e9; color: #1b5e20; border-left: 4px solid #43a047; }}
+.severity-high {{ color: #c62828; font-weight: 700; }}
+.severity-middle {{ color: #ef6c00; font-weight: 600; }}
+.status-used {{ color: #5f6368; }}
+.status-unused {{ color: #c62828; font-weight: 600; }}
 .flags-cell {{ font-size: 12px; max-width: 250px; }}
 .strengths-list li {{
     margin: 8px 0;
     padding-left: 8px;
-    color: #155724;
+    color: #1b5e20;
     list-style: none;
 }}
-.strengths-list li::before {{ content: "✓ "; font-weight: bold; color: #28a745; }}
+.strengths-list li::before {{ content: "✓ "; font-weight: bold; color: #43a047; }}
 .weaknesses-list li {{
     margin: 10px 0;
     padding-left: 8px;
-    color: #721c24;
+    color: #b71c1c;
     list-style: none;
     line-height: 1.5;
 }}
-.weaknesses-list li::before {{ content: "✗ "; font-weight: bold; color: #dc3545; }}
+.weaknesses-list li::before {{ content: "✗ "; font-weight: bold; color: #e53935; }}
 .unit-list {{ padding-left: 24px; }}
 .unit-list li {{ margin: 4px 0; font-size: 14px; }}
 .title-list {{ padding-left: 24px; max-height: 300px; overflow-y: auto; }}
@@ -2064,7 +2064,7 @@ details {{ margin-top: 12px; }}
 summary {{
     cursor: pointer;
     font-size: 13px;
-    color: #3498db;
+    color: #2979ff;
     font-weight: 500;
 }}
 summary:hover {{ text-decoration: underline; }}
