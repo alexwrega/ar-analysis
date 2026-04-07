@@ -1365,22 +1365,27 @@ def analyze_grade(grade, data):
 # HTML REPORT GENERATION
 # ============================================================================
 
-def pct_bar(pct, color, label=""):
-    """Generate an inline CSS bar for a percentage."""
+def pct_bar(pct, bg_class, label=""):
+    """Generate a Tailwind-styled bar for a percentage."""
     return (
-        f'<div style="display:flex;align-items:center;margin:4px 0;">'
-        f'<div style="width:60px;text-align:right;padding-right:8px;font-size:13px;color:#555;">{label}</div>'
-        f'<div style="flex:1;background:#e9ecef;border-radius:4px;height:22px;position:relative;">'
-        f'<div style="width:{min(pct, 100):.1f}%;background:{color};height:100%;border-radius:4px;'
-        f'min-width:2px;transition:width 0.3s;"></div>'
+        f'<div class="flex items-center my-1">'
+        f'<div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">{label}</div>'
+        f'<div class="flex-1 bg-gray-200 rounded h-[22px] relative">'
+        f'<div class="h-full rounded min-w-[2px] transition-all duration-300 {bg_class}" style="width:{min(pct, 100):.1f}%;"></div>'
         f'</div>'
-        f'<div style="width:55px;text-align:right;padding-left:8px;font-size:13px;font-weight:600;">{pct:.1f}%</div>'
+        f'<div class="w-[55px] text-right pl-2 text-[13px] font-semibold">{pct:.1f}%</div>'
         f'</div>'
     )
 
 
 def generate_html(all_grades):
     """Generate the complete HTML report."""
+    # Tailwind class constants for tables
+    TH = 'class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300"'
+    TD = 'class="px-3 py-2 border-b border-gray-200"'
+    TABLE = 'class="w-full border-collapse mt-3 text-sm"'
+    SUMMARY_CLS = 'class="cursor-pointer text-xs text-blue-600 font-medium hover:underline"'
+
     grade_tabs = ""
     grade_panels = ""
 
@@ -1389,29 +1394,30 @@ def generate_html(all_grades):
         active_class = " active" if grade == 3 else ""
         active_display = "block" if grade == 3 else "none"
 
-        grade_tabs += f'<button class="tab-btn{active_class}" onclick="showGrade({grade}, this)">Grade {grade}</button>\n'
+        tab_active_classes = " text-blue-600 border-blue-600 font-semibold" if grade == 3 else ""
+        grade_tabs += f'<button class="tab-btn px-4 py-3 border-b-[3px] border-transparent text-sm font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer whitespace-nowrap transition-all{tab_active_classes}" onclick="showGrade({grade}, this)">Grade {grade}</button>\n'
 
         # --- Build grade panel ---
         panel = f'<div id="grade-{grade}" class="grade-panel" style="display:{active_display};">\n'
 
         # Summary
-        panel += f'<div class="section-card">\n'
-        panel += f'<h2>Grade {grade} — Overview</h2>\n'
-        panel += f'<div class="stats-grid">\n'
-        panel += f'<div class="stat-box"><div class="stat-number">{m["total_articles"]}</div><div class="stat-label">Articles</div></div>\n'
-        panel += f'<div class="stat-box"><div class="stat-number">{m["total_questions"]}</div><div class="stat-label">Questions</div></div>\n'
-        panel += f'<div class="stat-box"><div class="stat-number">{m["num_units"]}</div><div class="stat-label">Units</div></div>\n'
+        panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Grade {grade} — Overview</h2>\n'
+        panel += f'<div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-4">\n'
+        panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{m["total_articles"]}</div><div class="text-xs text-gray-500 mt-1">Articles</div></div>\n'
+        panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{m["total_questions"]}</div><div class="text-xs text-gray-500 mt-1">Questions</div></div>\n'
+        panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{m["num_units"]}</div><div class="text-xs text-gray-500 mt-1">Units</div></div>\n'
         if m["lexile_values"]:
             avg_lex = sum(m["lexile_values"]) / len(m["lexile_values"])
             min_lex = min(m["lexile_values"])
             max_lex = max(m["lexile_values"])
-            panel += f'<div class="stat-box"><div class="stat-number">{avg_lex:.0f}</div><div class="stat-label">Avg Lexile ({min_lex}–{max_lex})</div></div>\n'
+            panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{avg_lex:.0f}</div><div class="text-xs text-gray-500 mt-1">Avg Lexile ({min_lex}–{max_lex})</div></div>\n'
         else:
             pl_info = PLANNED_LEXILE.get(grade)
             if pl_info:
-                panel += f'<div class="stat-box"><div class="stat-number warning-text">{pl_info["midpoint"]}</div><div class="stat-label">Planned Lexile ({pl_info["range"]})</div></div>\n'
+                panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-orange-600">{pl_info["midpoint"]}</div><div class="text-xs text-gray-500 mt-1">Planned Lexile ({pl_info["range"]})</div></div>\n'
             else:
-                panel += f'<div class="stat-box"><div class="stat-number warning-text">N/A</div><div class="stat-label">Lexile (no data)</div></div>\n'
+                panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-orange-600">N/A</div><div class="text-xs text-gray-500 mt-1">Lexile (no data)</div></div>\n'
         panel += f'</div></div>\n'
 
         # Curriculum Plan vs Reality (grades 9-12 only)
@@ -1421,115 +1427,115 @@ def generate_html(all_grades):
             pl = PLANNED_LEXILE.get(grade, {})
             pc = PLANNED_COUNTS.get(grade, {})
 
-            panel += f'<div class="section-card">\n'
-            panel += f'<h2>Curriculum Plan vs. Current Content</h2>\n'
-            panel += f'<p class="section-note">Cross-referencing the high school curriculum plan (XLSX) against '
+            panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+            panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Curriculum Plan vs. Current Content</h2>\n'
+            panel += f'<p class="text-xs text-gray-500 mb-3 italic">Cross-referencing the high school curriculum plan (XLSX) against '
             panel += f'actual QTI assessment data. The plan specifies {cp["total"]} texts for grade {grade} '
             panel += f'({cp["custom_count"]} are custom texts that need to be commissioned).</p>\n'
 
             # Plan overview stats
-            panel += f'<div class="stats-grid">\n'
-            panel += f'<div class="stat-box"><div class="stat-number">{cp["total"]}</div><div class="stat-label">Planned Texts</div></div>\n'
-            panel += f'<div class="stat-box"><div class="stat-number">{m["total_articles"]}</div><div class="stat-label">Current QTI Articles</div></div>\n'
-            panel += f'<div class="stat-box"><div class="stat-number">{len(xr["found_in_qti"])}</div><div class="stat-label">Matched to Plan</div></div>\n'
-            panel += f'<div class="stat-box"><div class="stat-number">{len(xr["extra_in_qti"])}</div><div class="stat-label">Not in Plan</div></div>\n'
+            panel += f'<div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-4">\n'
+            panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{cp["total"]}</div><div class="text-xs text-gray-500 mt-1">Planned Texts</div></div>\n'
+            panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{m["total_articles"]}</div><div class="text-xs text-gray-500 mt-1">Current QTI Articles</div></div>\n'
+            panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{len(xr["found_in_qti"])}</div><div class="text-xs text-gray-500 mt-1">Matched to Plan</div></div>\n'
+            panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{len(xr["extra_in_qti"])}</div><div class="text-xs text-gray-500 mt-1">Not in Plan</div></div>\n'
             panel += f'</div>\n'
 
             # Planned Lexile info
             if pl:
-                panel += f'<div style="margin:16px 0;padding:12px;background:#f0f7ff;border-radius:6px;border-left:4px solid #2979ff;">\n'
+                panel += f'<div class="my-4 bg-blue-50 border-l-4 border-blue-500 p-3 rounded-md">\n'
                 panel += f'<strong>Planned Lexile Range:</strong> {pl["range"]} (midpoint: {pl["midpoint"]}L)<br>\n'
                 panel += f'<strong>Scaffolded:</strong> Early {pl["early"]} → Mid {pl["mid"]} → Late {pl["late"]}<br>\n'
                 panel += f'<strong>Planned Word Count:</strong> {PLANNED_WORD_COUNTS.get(grade, "N/A")} per article\n'
                 panel += f'</div>\n'
 
             # Plan vs reality comparison table
-            panel += f'<table class="data-table"><thead><tr><th>Metric</th><th>Plan</th><th>Current QTI</th><th>Status</th></tr></thead><tbody>\n'
-            panel += f'<tr><td>Total Articles</td><td>{pc.get("articles", "?")}</td><td>{m["total_articles"]}</td>'
+            panel += f'<table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Metric</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Plan</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Current QTI</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Status</th></tr></thead><tbody>\n'
+            panel += f'<tr><td class="px-3 py-2 border-b border-gray-200">Total Articles</td><td class="px-3 py-2 border-b border-gray-200">{pc.get("articles", "?")}</td><td class="px-3 py-2 border-b border-gray-200">{m["total_articles"]}</td>'
             diff = m["total_articles"] - pc.get("articles", 0)
             if abs(diff) < 5:
-                panel += f'<td style="color:#28a745;">✓ Close match</td></tr>\n'
+                panel += f'<td class="px-3 py-2 border-b border-gray-200 text-green-600">✓ Close match</td></tr>\n'
             else:
-                panel += f'<td style="color:#dc3545;">⚠ {diff:+d} difference</td></tr>\n'
+                panel += f'<td class="px-3 py-2 border-b border-gray-200 text-red-600">⚠ {diff:+d} difference</td></tr>\n'
 
-            panel += f'<tr><td>Units</td><td>{pc.get("units", "?")}</td><td>{m["num_units"]}</td>'
+            panel += f'<tr><td class="px-3 py-2 border-b border-gray-200">Units</td><td class="px-3 py-2 border-b border-gray-200">{pc.get("units", "?")}</td><td class="px-3 py-2 border-b border-gray-200">{m["num_units"]}</td>'
             if m["num_units"] < 3:
-                panel += f'<td style="color:#dc3545;">⚠ No thematic units in QTI</td></tr>\n'
+                panel += f'<td class="px-3 py-2 border-b border-gray-200 text-red-600">⚠ No thematic units in QTI</td></tr>\n'
             else:
-                panel += f'<td>—</td></tr>\n'
+                panel += f'<td class="px-3 py-2 border-b border-gray-200">—</td></tr>\n'
 
-            panel += f'<tr><td>Literary Texts</td><td>{pc.get("literary", "?")}</td><td>{m["literary_count"]}</td>'
-            panel += f'<td>—</td></tr>\n'
-            panel += f'<tr><td>Informational Texts</td><td>{pc.get("informational", "?")}</td><td>{m["informational_count"]}</td>'
-            panel += f'<td>—</td></tr>\n'
+            panel += f'<tr><td class="px-3 py-2 border-b border-gray-200">Literary Texts</td><td class="px-3 py-2 border-b border-gray-200">{pc.get("literary", "?")}</td><td class="px-3 py-2 border-b border-gray-200">{m["literary_count"]}</td>'
+            panel += f'<td class="px-3 py-2 border-b border-gray-200">—</td></tr>\n'
+            panel += f'<tr><td class="px-3 py-2 border-b border-gray-200">Informational Texts</td><td class="px-3 py-2 border-b border-gray-200">{pc.get("informational", "?")}</td><td class="px-3 py-2 border-b border-gray-200">{m["informational_count"]}</td>'
+            panel += f'<td class="px-3 py-2 border-b border-gray-200">—</td></tr>\n'
 
-            panel += f'<tr><td>Lexile Data</td><td>{pl.get("range", "?")}</td>'
+            panel += f'<tr><td class="px-3 py-2 border-b border-gray-200">Lexile Data</td><td class="px-3 py-2 border-b border-gray-200">{pl.get("range", "?")}</td>'
             if m["lexile_values"]:
-                panel += f'<td>{min(m["lexile_values"])}L–{max(m["lexile_values"])}L</td><td>—</td></tr>\n'
+                panel += f'<td class="px-3 py-2 border-b border-gray-200">{min(m["lexile_values"])}L–{max(m["lexile_values"])}L</td><td class="px-3 py-2 border-b border-gray-200">—</td></tr>\n'
             else:
-                panel += f'<td style="color:#dc3545;">No data (all 0)</td><td style="color:#dc3545;">⚠ Cannot verify complexity</td></tr>\n'
+                panel += f'<td class="px-3 py-2 border-b border-gray-200 text-red-600">No data (all 0)</td><td class="px-3 py-2 border-b border-gray-200 text-red-600">⚠ Cannot verify complexity</td></tr>\n'
 
-            panel += f'<tr><td>Custom Texts Needed</td><td colspan="2">{cp["custom_count"]} texts need to be written</td>'
-            panel += f'<td style="color:#e67e22;">⚠ Not yet created</td></tr>\n'
+            panel += f'<tr><td class="px-3 py-2 border-b border-gray-200">Custom Texts Needed</td><td colspan="2" class="px-3 py-2 border-b border-gray-200">{cp["custom_count"]} texts need to be written</td>'
+            panel += f'<td class="px-3 py-2 border-b border-gray-200 text-orange-500">⚠ Not yet created</td></tr>\n'
             panel += f'</tbody></table>\n'
 
             # Planned unit structure
             if cp["units"]:
-                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Planned Unit Structure</h3>\n'
-                panel += f'<ol class="unit-list">\n'
+                panel += f'<h3 class="mt-4 text-indigo-900 font-semibold text-base">Planned Unit Structure</h3>\n'
+                panel += f'<ol class="pl-6">\n'
                 for u in cp["units"]:
-                    panel += f'<li>{escape(u)}</li>\n'
+                    panel += f'<li class="my-1 text-sm">{escape(u)}</li>\n'
                 panel += f'</ol>\n'
                 if m["num_units"] <= 1:
-                    panel += f'<div class="alert alert-danger">The QTI data has no thematic unit structure — all {m["total_articles"]} articles are in a single "Reading Exercises" unit, unlike the {len(cp["units"])} well-organized units specified in the curriculum plan.</div>\n'
+                    panel += f'<div class="p-3 rounded-md mb-3 text-sm font-medium bg-red-50 text-red-800 border-l-4 border-red-500">The QTI data has no thematic unit structure — all {m["total_articles"]} articles are in a single "Reading Exercises" unit, unlike the {len(cp["units"])} well-organized units specified in the curriculum plan.</div>\n'
 
             # Planned genre distribution
             if cp.get("genres"):
-                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Planned Genre Distribution</h3>\n'
-                panel += f'<table class="data-table"><thead><tr><th>Genre</th><th>Count</th><th>% of Plan</th></tr></thead><tbody>\n'
+                panel += f'<h3 class="mt-4 text-indigo-900 font-semibold text-base">Planned Genre Distribution</h3>\n'
+                panel += f'<table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Genre</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">% of Plan</th></tr></thead><tbody>\n'
                 for genre, count in sorted(cp["genres"].items(), key=lambda x: -x[1]):
                     gpct = count / cp["total"] * 100 if cp["total"] else 0
-                    panel += f'<tr><td>{escape(genre)}</td><td>{count}</td><td>{gpct:.1f}%</td></tr>\n'
+                    panel += f'<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">{escape(genre)}</td><td class="px-3 py-2 border-b border-gray-200">{count}</td><td class="px-3 py-2 border-b border-gray-200">{gpct:.1f}%</td></tr>\n'
                 panel += f'</tbody></table>\n'
 
             # Missing texts from plan
             if xr["missing_from_qti"]:
-                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Planned Texts Missing from QTI ({len(xr["missing_from_qti"])})</h3>\n'
-                panel += f'<p class="section-note">Published texts specified in the curriculum plan that are not found in the current QTI data.</p>\n'
-                panel += f'<details open><summary>Missing published texts ({len(xr["missing_from_qti"])})</summary>\n'
-                panel += f'<table class="data-table"><thead><tr><th>Title</th><th>Author</th><th>Type</th><th>Unit</th></tr></thead><tbody>\n'
+                panel += f'<h3 class="mt-4 text-indigo-900 font-semibold text-base">Planned Texts Missing from QTI ({len(xr["missing_from_qti"])})</h3>\n'
+                panel += f'<p class="text-xs text-gray-500 mb-3 italic">Published texts specified in the curriculum plan that are not found in the current QTI data.</p>\n'
+                panel += f'<details open><summary class="cursor-pointer text-xs text-blue-600 font-medium hover:underline">Missing published texts ({len(xr["missing_from_qti"])})</summary>\n'
+                panel += f'<table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Title</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Author</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Unit</th></tr></thead><tbody>\n'
                 for t in xr["missing_from_qti"][:50]:
-                    panel += f'<tr><td>{escape(t["title"][:80])}</td><td>{escape(t["author"][:40])}</td>'
-                    panel += f'<td>{escape(t["text_type"][:40])}</td><td style="font-size:12px;">{escape(t["unit"][:50])}</td></tr>\n'
+                    panel += f'<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">{escape(t["title"][:80])}</td><td class="px-3 py-2 border-b border-gray-200">{escape(t["author"][:40])}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200">{escape(t["text_type"][:40])}</td><td class="px-3 py-2 border-b border-gray-200 text-xs">{escape(t["unit"][:50])}</td></tr>\n'
                 if len(xr["missing_from_qti"]) > 50:
-                    panel += f'<tr><td colspan="4" style="color:#6c757d;font-style:italic;">... and {len(xr["missing_from_qti"]) - 50} more</td></tr>\n'
+                    panel += f'<tr><td colspan="4" class="px-3 py-2 border-b border-gray-200 text-gray-500 italic">... and {len(xr["missing_from_qti"]) - 50} more</td></tr>\n'
                 panel += f'</tbody></table></details>\n'
 
             # Custom texts not yet written
             if xr["custom_not_yet_written"]:
-                panel += f'<h3 style="margin-top:16px;color:#1a237e;">Custom Texts Not Yet Written ({len(xr["custom_not_yet_written"])})</h3>\n'
-                panel += f'<p class="section-note">The plan calls for custom informational texts to be commissioned. These are not yet in the QTI data.</p>\n'
-                panel += f'<details><summary>Custom texts needed ({len(xr["custom_not_yet_written"])})</summary>\n'
-                panel += f'<table class="data-table"><thead><tr><th>Title</th><th>Unit</th><th>Notes</th></tr></thead><tbody>\n'
+                panel += f'<h3 class="mt-4 text-indigo-900 font-semibold text-base">Custom Texts Not Yet Written ({len(xr["custom_not_yet_written"])})</h3>\n'
+                panel += f'<p class="text-xs text-gray-500 mb-3 italic">The plan calls for custom informational texts to be commissioned. These are not yet in the QTI data.</p>\n'
+                panel += f'<details><summary class="cursor-pointer text-xs text-blue-600 font-medium hover:underline">Custom texts needed ({len(xr["custom_not_yet_written"])})</summary>\n'
+                panel += f'<table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Title</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Unit</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Notes</th></tr></thead><tbody>\n'
                 for t in xr["custom_not_yet_written"][:40]:
-                    panel += f'<tr><td>{escape(t["title"][:80])}</td>'
-                    panel += f'<td style="font-size:12px;">{escape(t["unit"][:50])}</td>'
-                    panel += f'<td style="font-size:12px;">{escape(t["notes"][:150])}</td></tr>\n'
+                    panel += f'<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">{escape(t["title"][:80])}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200 text-xs">{escape(t["unit"][:50])}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200 text-xs">{escape(t["notes"][:150])}</td></tr>\n'
                 panel += f'</tbody></table></details>\n'
 
             # Extra QTI texts not in plan
             if xr["extra_in_qti"]:
-                panel += f'<h3 style="margin-top:16px;color:#1a237e;">QTI Texts Not in Plan ({len(xr["extra_in_qti"])})</h3>\n'
-                panel += f'<p class="section-note">Articles in current QTI data that are NOT in the curriculum plan.</p>\n'
-                panel += f'<details><summary>Extra QTI texts ({len(xr["extra_in_qti"])})</summary><ul class="title-list">\n'
+                panel += f'<h3 class="mt-4 text-indigo-900 font-semibold text-base">QTI Texts Not in Plan ({len(xr["extra_in_qti"])})</h3>\n'
+                panel += f'<p class="text-xs text-gray-500 mb-3 italic">Articles in current QTI data that are NOT in the curriculum plan.</p>\n'
+                panel += f'<details><summary class="cursor-pointer text-xs text-blue-600 font-medium hover:underline">Extra QTI texts ({len(xr["extra_in_qti"])})</summary><ul class="pl-6 max-h-[300px] overflow-y-auto">\n'
                 for t in sorted(xr["extra_in_qti"])[:80]:
-                    panel += f'<li>{escape(t)}</li>\n'
+                    panel += f'<li class="text-[13px] my-0.5 text-gray-500">{escape(t)}</li>\n'
                 if len(xr["extra_in_qti"]) > 80:
-                    panel += f'<li style="color:#6c757d;font-style:italic;">... and {len(xr["extra_in_qti"]) - 80} more</li>\n'
+                    panel += f'<li class="text-gray-500 italic">... and {len(xr["extra_in_qti"]) - 80} more</li>\n'
                 panel += f'</ul></details>\n'
 
             # Match summary
-            panel += f'<div style="margin-top:16px;padding:12px;background:#fff3cd;border-radius:6px;border-left:4px solid #e67e22;">\n'
+            panel += f'<div class="mt-4 bg-amber-50 border-l-4 border-orange-600 p-3 rounded-md">\n'
             panel += f'<strong>Plan Match Rate:</strong> {xr["match_rate"]:.0f}% of planned texts found in QTI data '
             panel += f'({len(xr["found_in_qti"])} of {cp["total"]}). '
             panel += f'{len(xr["missing_from_qti"])} published texts are missing, '
@@ -1540,22 +1546,22 @@ def generate_html(all_grades):
             panel += f'</div>\n'
 
         # Literary vs Informational
-        panel += f'<div class="section-card">\n'
-        panel += f'<h2>Literary vs. Informational Texts</h2>\n'
-        panel += f'<p class="section-note">Literary = the text IS a literary work (poem, story, play, myth). '
+        panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Literary vs. Informational Texts</h2>\n'
+        panel += f'<p class="text-xs text-gray-500 mb-3 italic">Literary = the text IS a literary work (poem, story, play, myth). '
         panel += f'Informational = everything else, including texts <em>about</em> literary works.</p>\n'
-        panel += pct_bar(m["literary_pct"], "#2979ff", "Literary")
-        panel += pct_bar(m["informational_pct"], "#e53935", "Info")
-        panel += f'<table class="data-table"><thead><tr><th>Type</th><th>Count</th><th>Percentage</th></tr></thead><tbody>\n'
-        panel += f'<tr><td>Literary</td><td>{m["literary_count"]}</td><td>{m["literary_pct"]:.1f}%</td></tr>\n'
-        panel += f'<tr><td>Informational</td><td>{m["informational_count"]}</td><td>{m["informational_pct"]:.1f}%</td></tr>\n'
+        panel += pct_bar(m["literary_pct"], "bg-blue-500", "Literary")
+        panel += pct_bar(m["informational_pct"], "bg-red-500", "Info")
+        panel += f'<table {TABLE}><thead><tr><th {TH}>Type</th><th {TH}>Count</th><th {TH}>Percentage</th></tr></thead><tbody>\n'
+        panel += f'<tr class="hover:bg-gray-50"><td {TD}>Literary</td><td {TD}>{m["literary_count"]}</td><td {TD}>{m["literary_pct"]:.1f}%</td></tr>\n'
+        panel += f'<tr class="hover:bg-gray-50"><td {TD}>Informational</td><td {TD}>{m["informational_count"]}</td><td {TD}>{m["informational_pct"]:.1f}%</td></tr>\n'
         panel += f'</tbody></table>\n'
 
         # Collapsible literary titles
         if m["literary_titles"]:
-            panel += f'<details><summary>Literary texts ({len(m["literary_titles"])})</summary><ul class="title-list">\n'
+            panel += f'<details><summary {SUMMARY_CLS}>Literary texts ({len(m["literary_titles"])})</summary><ul class="pl-6 max-h-[300px] overflow-y-auto">\n'
             for t in sorted(m["literary_titles"]):
-                panel += f'<li>{escape(t)}</li>\n'
+                panel += f'<li class="text-[13px] my-0.5 text-gray-500">{escape(t)}</li>\n'
             panel += f'</ul></details>\n'
 
         panel += f'</div>\n'
@@ -1570,22 +1576,22 @@ def generate_html(all_grades):
             hybrid_pct = hybrid_n / total_lit * 100 if total_lit else 0
             syn_pct = syn_n / total_lit * 100 if total_lit else 0
 
-            panel += f'<div class="section-card">\n'
-            panel += f'<h2>Original Text vs. Synopsis (Literary Units)</h2>\n'
-            panel += f'<p class="section-note">Checks whether assessments in literary units present the '
+            panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+            panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Original Text vs. Synopsis (Literary Units)</h2>\n'
+            panel += f'<p class="text-xs text-gray-500 mb-3 italic">Checks whether assessments in literary units present the '
             panel += f'actual original literary work or a curriculum-written synopsis/retelling/educational article about it.</p>\n'
 
-            panel += pct_bar(orig_pct, "#43a047", "Original")
-            panel += pct_bar(hybrid_pct, "#ff9100", "Hybrid")
-            panel += pct_bar(syn_pct, "#e53935", "Synopsis")
+            panel += pct_bar(orig_pct, "bg-emerald-500", "Original")
+            panel += pct_bar(hybrid_pct, "bg-amber-500", "Hybrid")
+            panel += pct_bar(syn_pct, "bg-red-500", "Synopsis")
 
-            panel += f'<table class="data-table"><thead><tr><th>Classification</th><th>Count</th><th>Percentage</th><th>Description</th></tr></thead><tbody>\n'
-            panel += f'<tr><td><strong>Original Text</strong></td><td>{orig_n}</td><td>{orig_pct:.1f}%</td>'
-            panel += f'<td>Presents actual original literary text as the primary reading</td></tr>\n'
-            panel += f'<tr><td><strong>Synopsis + Quotes</strong></td><td>{hybrid_n}</td><td>{hybrid_pct:.1f}%</td>'
-            panel += f'<td>Curriculum-written article with embedded original excerpts</td></tr>\n'
-            panel += f'<tr><td><strong>Pure Synopsis</strong></td><td>{syn_n}</td><td>{syn_pct:.1f}%</td>'
-            panel += f'<td>Entirely curriculum-written synopsis, retelling, or educational article</td></tr>\n'
+            panel += f'<table {TABLE}><thead><tr><th {TH}>Classification</th><th {TH}>Count</th><th {TH}>Percentage</th><th {TH}>Description</th></tr></thead><tbody>\n'
+            panel += f'<tr class="hover:bg-gray-50"><td {TD}><strong>Original Text</strong></td><td {TD}>{orig_n}</td><td {TD}>{orig_pct:.1f}%</td>'
+            panel += f'<td {TD}>Presents actual original literary text as the primary reading</td></tr>\n'
+            panel += f'<tr class="hover:bg-gray-50"><td {TD}><strong>Synopsis + Quotes</strong></td><td {TD}>{hybrid_n}</td><td {TD}>{hybrid_pct:.1f}%</td>'
+            panel += f'<td {TD}>Curriculum-written article with embedded original excerpts</td></tr>\n'
+            panel += f'<tr class="hover:bg-gray-50"><td {TD}><strong>Pure Synopsis</strong></td><td {TD}>{syn_n}</td><td {TD}>{syn_pct:.1f}%</td>'
+            panel += f'<td {TD}>Entirely curriculum-written synopsis, retelling, or educational article</td></tr>\n'
             panel += f'</tbody></table>\n'
 
             # Collapsible details
@@ -1595,36 +1601,36 @@ def generate_html(all_grades):
                 ("synopsis", "Pure synopsis assessments", m["originality_details"]["synopsis"]),
             ]:
                 if details_list:
-                    panel += f'<details><summary>{label} ({len(details_list)})</summary><ul class="title-list">\n'
+                    panel += f'<details><summary {SUMMARY_CLS}>{label} ({len(details_list)})</summary><ul class="pl-6 max-h-[300px] overflow-y-auto">\n'
                     for t in sorted(details_list):
-                        panel += f'<li>{escape(t)}</li>\n'
+                        panel += f'<li class="text-[13px] my-0.5 text-gray-500">{escape(t)}</li>\n'
                     panel += f'</ul></details>\n'
 
             panel += f'</div>\n'
 
         # Excerpt vs Non-excerpt
-        panel += f'<div class="section-card">\n'
-        panel += f'<h2>Excerpt vs. Non-Excerpt</h2>\n'
-        panel += f'<p class="section-note">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>\n'
-        panel += pct_bar(m["excerpt_pct"], "#e53935", "Excerpt")
-        panel += pct_bar(m["non_excerpt_pct"], "#2979ff", "Complete")
-        panel += f'<table class="data-table"><thead><tr><th>Type</th><th>Count</th><th>Percentage</th></tr></thead><tbody>\n'
-        panel += f'<tr><td>Excerpt</td><td>{m["excerpt_count"]}</td><td>{m["excerpt_pct"]:.1f}%</td></tr>\n'
-        panel += f'<tr><td>Non-Excerpt</td><td>{m["non_excerpt_count"]}</td><td>{m["non_excerpt_pct"]:.1f}%</td></tr>\n'
+        panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>\n'
+        panel += f'<p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>\n'
+        panel += pct_bar(m["excerpt_pct"], "bg-red-500", "Excerpt")
+        panel += pct_bar(m["non_excerpt_pct"], "bg-blue-500", "Complete")
+        panel += f'<table {TABLE}><thead><tr><th {TH}>Type</th><th {TH}>Count</th><th {TH}>Percentage</th></tr></thead><tbody>\n'
+        panel += f'<tr class="hover:bg-gray-50"><td {TD}>Excerpt</td><td {TD}>{m["excerpt_count"]}</td><td {TD}>{m["excerpt_pct"]:.1f}%</td></tr>\n'
+        panel += f'<tr class="hover:bg-gray-50"><td {TD}>Non-Excerpt</td><td {TD}>{m["non_excerpt_count"]}</td><td {TD}>{m["non_excerpt_pct"]:.1f}%</td></tr>\n'
         panel += f'</tbody></table>\n'
 
         if m["excerpt_titles"]:
-            panel += f'<details><summary>Excerpted texts ({len(m["excerpt_titles"])})</summary><ul class="title-list">\n'
+            panel += f'<details><summary {SUMMARY_CLS}>Excerpted texts ({len(m["excerpt_titles"])})</summary><ul class="pl-6 max-h-[300px] overflow-y-auto">\n'
             for t in sorted(m["excerpt_titles"]):
-                panel += f'<li>{escape(t)}</li>\n'
+                panel += f'<li class="text-[13px] my-0.5 text-gray-500">{escape(t)}</li>\n'
             panel += f'</ul></details>\n'
 
         panel += f'</div>\n'
 
         # Standards Coverage — split into RL and RI
-        panel += f'<div class="section-card">\n'
-        panel += f'<h2>Standards Coverage (CCSS ELA Reading)</h2>\n'
-        panel += f'<p class="section-note">Coverage estimated by keyword analysis of question prompts and unit titles, '
+        panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Standards Coverage (CCSS ELA Reading)</h2>\n'
+        panel += f'<p class="text-xs text-gray-500 mb-3 italic">Coverage estimated by keyword analysis of question prompts and unit titles, '
         panel += f'split by text type. RL = Reading Literature, RI = Reading Informational Text. '
         panel += f'Standard 8 applies to informational text only. '
         panel += f'Standard 10 (Range of Reading) is assessed via Lexile coverage.</p>\n'
@@ -1632,9 +1638,11 @@ def generate_html(all_grades):
         g = grade_band(grade)
 
         # --- RL Table ---
-        panel += f'<h3 style="margin-top:16px;color:#1a237e;">RL — Reading Literature</h3>\n'
-        panel += f'<table class="data-table standards-table"><thead><tr>'
-        panel += f'<th>Standard</th><th>Description</th><th>Questions</th><th>% of Questions</th><th>Assessments</th></tr></thead><tbody>\n'
+        panel += f'<h3 class="mt-4 text-indigo-900 font-semibold text-base">RL — Reading Literature</h3>\n'
+        panel += f'<table {TABLE}><thead><tr>'
+        panel += f'<th {TH}>Standard</th><th {TH}>Description</th><th {TH}>Questions</th><th {TH}>% of Questions</th><th {TH}>Assessments</th></tr></thead><tbody>\n'
+
+        std_row_map = {"std-none": "bg-red-100 text-red-900", "std-weak": "bg-orange-50 text-orange-800", "std-moderate": "", "std-strong": "bg-teal-50 text-teal-900"}
 
         for std in ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R9", "R10"]:
             s = m["standards"][std]
@@ -1644,24 +1652,24 @@ def generate_html(all_grades):
             label = ccss_label(grade, std, "RL")
 
             if std == "R10":
-                row_class = "std-moderate" if m["lexile_values"] else "std-none"
+                row_class = std_row_map["std-moderate"] if m["lexile_values"] else std_row_map["std-none"]
                 if m["lexile_values"]:
                     avg_lex = sum(m["lexile_values"]) / len(m["lexile_values"])
                     r10_note = f'Lexile range {min(m["lexile_values"])}–{max(m["lexile_values"])} (avg {avg_lex:.0f})'
                 else:
                     r10_note = "No Lexile data"
-                panel += f'<tr class="{row_class}"><td><strong>{escape(label)}</strong></td>'
-                panel += f'<td>{escape(STANDARD_DESCRIPTIONS[std])}</td>'
-                panel += f'<td colspan="3" style="font-style:italic;">{escape(r10_note)}</td></tr>\n'
+                panel += f'<tr class="{row_class}"><td {TD}><strong>{escape(label)}</strong></td>'
+                panel += f'<td {TD}>{escape(STANDARD_DESCRIPTIONS[std])}</td>'
+                panel += f'<td colspan="3" {TD}><span class="italic">{escape(r10_note)}</span></td></tr>\n'
             else:
                 if rl_q == 0:
-                    row_class = "std-none"
+                    row_class = std_row_map["std-none"]
                 elif rl_pct < 3:
-                    row_class = "std-weak"
+                    row_class = std_row_map["std-weak"]
                 elif rl_pct < 10:
-                    row_class = "std-moderate"
+                    row_class = std_row_map["std-moderate"]
                 else:
-                    row_class = "std-strong"
+                    row_class = std_row_map["std-strong"]
 
                 # RL-specific descriptions for standards that differ
                 rl_desc = STANDARD_DESCRIPTIONS[std]
@@ -1670,15 +1678,15 @@ def generate_html(all_grades):
                 elif std == "R9":
                     rl_desc = "Compare treatment of themes/topics across genres and periods"
 
-                panel += f'<tr class="{row_class}"><td><strong>{escape(label)}</strong></td><td>{escape(rl_desc)}</td>'
-                panel += f'<td>{rl_q}</td><td>{rl_pct:.1f}%</td><td>{rl_a}</td></tr>\n'
+                panel += f'<tr class="{row_class}"><td {TD}><strong>{escape(label)}</strong></td><td {TD}>{escape(rl_desc)}</td>'
+                panel += f'<td {TD}>{rl_q}</td><td {TD}>{rl_pct:.1f}%</td><td {TD}>{rl_a}</td></tr>\n'
 
         panel += f'</tbody></table>\n'
 
         # --- RI Table ---
-        panel += f'<h3 style="margin-top:20px;color:#1a237e;">RI — Reading Informational Text</h3>\n'
-        panel += f'<table class="data-table standards-table"><thead><tr>'
-        panel += f'<th>Standard</th><th>Description</th><th>Questions</th><th>% of Questions</th><th>Assessments</th></tr></thead><tbody>\n'
+        panel += f'<h3 class="mt-5 text-indigo-900 font-semibold text-base">RI — Reading Informational Text</h3>\n'
+        panel += f'<table {TABLE}><thead><tr>'
+        panel += f'<th {TH}>Standard</th><th {TH}>Description</th><th {TH}>Questions</th><th {TH}>% of Questions</th><th {TH}>Assessments</th></tr></thead><tbody>\n'
 
         for std in ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10"]:
             s = m["standards"][std]
@@ -1688,24 +1696,24 @@ def generate_html(all_grades):
             label = ccss_label(grade, std, "RI")
 
             if std == "R10":
-                row_class = "std-moderate" if m["lexile_values"] else "std-none"
+                row_class = std_row_map["std-moderate"] if m["lexile_values"] else std_row_map["std-none"]
                 if m["lexile_values"]:
                     avg_lex = sum(m["lexile_values"]) / len(m["lexile_values"])
                     r10_note = f'Lexile range {min(m["lexile_values"])}–{max(m["lexile_values"])} (avg {avg_lex:.0f})'
                 else:
                     r10_note = "No Lexile data"
-                panel += f'<tr class="{row_class}"><td><strong>{escape(label)}</strong></td>'
-                panel += f'<td>{escape(STANDARD_DESCRIPTIONS[std])}</td>'
-                panel += f'<td colspan="3" style="font-style:italic;">{escape(r10_note)}</td></tr>\n'
+                panel += f'<tr class="{row_class}"><td {TD}><strong>{escape(label)}</strong></td>'
+                panel += f'<td {TD}>{escape(STANDARD_DESCRIPTIONS[std])}</td>'
+                panel += f'<td colspan="3" {TD}><span class="italic">{escape(r10_note)}</span></td></tr>\n'
             else:
                 if ri_q == 0:
-                    row_class = "std-none"
+                    row_class = std_row_map["std-none"]
                 elif ri_pct < 3:
-                    row_class = "std-weak"
+                    row_class = std_row_map["std-weak"]
                 elif ri_pct < 10:
-                    row_class = "std-moderate"
+                    row_class = std_row_map["std-moderate"]
                 else:
-                    row_class = "std-strong"
+                    row_class = std_row_map["std-strong"]
 
                 # RI-specific descriptions
                 ri_desc = STANDARD_DESCRIPTIONS[std]
@@ -1714,85 +1722,86 @@ def generate_html(all_grades):
                 elif std == "R9":
                     ri_desc = "Compare/contrast how authors present information on same topic"
 
-                panel += f'<tr class="{row_class}"><td><strong>{escape(label)}</strong></td><td>{escape(ri_desc)}</td>'
-                panel += f'<td>{ri_q}</td><td>{ri_pct:.1f}%</td><td>{ri_a}</td></tr>\n'
+                panel += f'<tr class="{row_class}"><td {TD}><strong>{escape(label)}</strong></td><td {TD}>{escape(ri_desc)}</td>'
+                panel += f'<td {TD}>{ri_q}</td><td {TD}>{ri_pct:.1f}%</td><td {TD}>{ri_a}</td></tr>\n'
 
         panel += f'</tbody></table>\n'
         panel += f'</div>\n'
 
         # Answer Distribution
-        panel += f'<div class="section-card">\n'
-        panel += f'<h2>Correct Answer Distribution</h2>\n'
-        panel += f'<p class="section-note">Ideal distribution: ~25% each for A, B, C, D.</p>\n'
+        panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>\n'
+        panel += f'<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>\n'
 
         labels = ["A", "B", "C", "D"]
-        colors = ["#2979ff", "#43a047", "#ff9100", "#e53935"]
+        colors = ["bg-blue-500", "bg-emerald-500", "bg-amber-500", "bg-red-500"]
         for i in range(4):
             count = m["answer_distribution"].get(i, 0)
             pct = (count / m["answer_total"] * 100) if m["answer_total"] else 0
             panel += pct_bar(pct, colors[i], labels[i])
 
-        panel += f'<table class="data-table"><thead><tr><th>Answer</th><th>Count</th><th>Percentage</th><th>Deviation from 25%</th></tr></thead><tbody>\n'
+        panel += f'<table {TABLE}><thead><tr><th {TH}>Answer</th><th {TH}>Count</th><th {TH}>Percentage</th><th {TH}>Deviation from 25%</th></tr></thead><tbody>\n'
+        dev_classes = {"dev-bad": "text-red-600 font-semibold", "dev-warn": "text-orange-600 font-medium", "dev-ok": "text-green-700"}
         for i in range(4):
             count = m["answer_distribution"].get(i, 0)
             pct = (count / m["answer_total"] * 100) if m["answer_total"] else 0
             dev = pct - 25
-            dev_class = "dev-bad" if abs(dev) > 10 else ("dev-warn" if abs(dev) > 5 else "dev-ok")
-            panel += f'<tr><td><strong>{labels[i]}</strong></td><td>{count}</td><td>{pct:.1f}%</td>'
-            panel += f'<td class="{dev_class}">{dev:+.1f}%</td></tr>\n'
+            dev_class = dev_classes["dev-bad"] if abs(dev) > 10 else (dev_classes["dev-warn"] if abs(dev) > 5 else dev_classes["dev-ok"])
+            panel += f'<tr class="hover:bg-gray-50"><td {TD}><strong>{labels[i]}</strong></td><td {TD}>{count}</td><td {TD}>{pct:.1f}%</td>'
+            panel += f'<td class="px-3 py-2 border-b border-gray-200 {dev_class}">{dev:+.1f}%</td></tr>\n'
         panel += f'</tbody></table>\n'
         panel += f'</div>\n'
 
         # Flagged Items
         if grade >= 5:
-            panel += f'<div class="section-card">\n'
-            panel += f'<h2>Flagged Content (from Appropriateness Audit)</h2>\n'
-            panel += f'<p class="section-note">Items previously flagged at '
+            panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+            panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Flagged Content (from Appropriateness Audit)</h2>\n'
+            panel += f'<p class="text-xs text-gray-500 mb-3 italic">Items previously flagged at '
             panel += f'<a href="https://ilmych.github.io/reading-appropriateness/" target="_blank">'
             panel += f'ilmych.github.io/reading-appropriateness</a>. '
             panel += f'Checked against current grade {grade} content.</p>\n'
 
             if m["flagged_items"]:
-                panel += f'<div class="alert alert-danger">⚠ {len(m["flagged_items"])} flagged item(s) found in current content</div>\n'
-                panel += f'<table class="data-table flagged-table"><thead><tr>'
-                panel += f'<th>Flagged Title</th><th>Current Title</th><th>Prior Status</th><th>Severity</th><th>Flags</th><th>Match</th></tr></thead><tbody>\n'
+                panel += f'<div class="p-3 rounded-md mb-3 text-sm font-medium bg-red-50 text-red-800 border-l-4 border-red-500">⚠ {len(m["flagged_items"])} flagged item(s) found in current content</div>\n'
+                panel += f'<table class="w-full border-collapse mt-3 text-[13px]"><thead><tr>'
+                panel += f'<th {TH}>Flagged Title</th><th {TH}>Current Title</th><th {TH}>Prior Status</th><th {TH}>Severity</th><th {TH}>Flags</th><th {TH}>Match</th></tr></thead><tbody>\n'
                 for item in m["flagged_items"]:
-                    sev_class = "severity-high" if item["severity"] == "HIGH" else "severity-middle"
-                    status_class = "status-used" if item["status"] == "Used" else "status-unused"
-                    panel += f'<tr><td>{escape(item["flagged_title"])}</td>'
-                    panel += f'<td>{escape(item["current_title"])}</td>'
-                    panel += f'<td class="{status_class}">{item["status"]}</td>'
-                    panel += f'<td class="{sev_class}">{item["severity"]}</td>'
-                    panel += f'<td class="flags-cell">{escape(item["flags"])}</td>'
-                    panel += f'<td>{item["match_type"]}</td></tr>\n'
+                    sev_class = "text-red-800 font-bold" if item["severity"] == "HIGH" else "text-orange-600 font-semibold"
+                    status_class = "text-gray-500" if item["status"] == "Used" else "text-red-800 font-semibold"
+                    panel += f'<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200 align-top">{escape(item["flagged_title"])}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200 align-top">{escape(item["current_title"])}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200 align-top {status_class}">{item["status"]}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200 align-top {sev_class}">{item["severity"]}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200 align-top text-xs max-w-[250px]">{escape(item["flags"])}</td>'
+                    panel += f'<td class="px-3 py-2 border-b border-gray-200 align-top">{item["match_type"]}</td></tr>\n'
                 panel += f'</tbody></table>\n'
             else:
-                panel += f'<div class="alert alert-success">No flagged items found in current content.</div>\n'
+                panel += f'<div class="p-3 rounded-md mb-3 text-sm font-medium bg-green-50 text-green-800 border-l-4 border-green-500">No flagged items found in current content.</div>\n'
             panel += f'</div>\n'
 
         # Strengths
-        panel += f'<div class="section-card">\n'
-        panel += f'<h2>Strengths</h2>\n'
-        panel += f'<ul class="strengths-list">\n'
+        panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Strengths</h2>\n'
+        panel += f'<ul class="list-none">\n'
         for s in m["strengths"]:
-            panel += f'<li>{escape(s)}</li>\n'
+            panel += f'<li class="my-2 pl-2 text-green-800 before:content-[\'\\2713_\'] before:font-bold before:text-green-600">{escape(s)}</li>\n'
         panel += f'</ul></div>\n'
 
         # Weaknesses
-        panel += f'<div class="section-card">\n'
-        panel += f'<h2>Weaknesses</h2>\n'
-        panel += f'<ul class="weaknesses-list">\n'
+        panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>\n'
+        panel += f'<ul class="list-none">\n'
         for w in m["weaknesses"]:
-            panel += f'<li>{escape(w)}</li>\n'
+            panel += f'<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-[\'\\2717_\'] before:font-bold before:text-red-600">{escape(w)}</li>\n'
         panel += f'</ul></div>\n'
 
         # Unit list
         if m["unit_titles"]:
-            panel += f'<div class="section-card">\n'
-            panel += f'<h2>Units</h2>\n'
-            panel += f'<ol class="unit-list">\n'
+            panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+            panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Units</h2>\n'
+            panel += f'<ol class="pl-6">\n'
             for ut in m["unit_titles"]:
-                panel += f'<li>{escape(ut)}</li>\n'
+                panel += f'<li class="my-1 text-sm">{escape(ut)}</li>\n'
             panel += f'</ol></div>\n'
 
         panel += f'</div>\n'  # close grade panel
@@ -1800,13 +1809,13 @@ def generate_html(all_grades):
 
     # --- Cross-grade summary ---
     summary_html = '<div id="summary" class="grade-panel" style="display:none;">\n'
-    summary_html += '<div class="section-card"><h2>Cross-Grade Summary</h2>\n'
+    summary_html += '<div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Cross-Grade Summary</h2>\n'
 
-    summary_html += '<div style="overflow-x:auto;">\n'
-    summary_html += '<table class="data-table"><thead><tr>'
-    summary_html += '<th>Grade</th><th>Articles</th><th>Questions</th><th>Units</th>'
-    summary_html += '<th>Literary %</th><th>Synopsis %</th><th>Excerpt %</th><th>A %</th><th>B %</th><th>C %</th><th>D %</th>'
-    summary_html += '<th>Flagged</th></tr></thead><tbody>\n'
+    summary_html += '<div class="overflow-x-auto">\n'
+    summary_html += f'<table {TABLE}><thead><tr>'
+    summary_html += f'<th {TH}>Grade</th><th {TH}>Articles</th><th {TH}>Questions</th><th {TH}>Units</th>'
+    summary_html += f'<th {TH}>Literary %</th><th {TH}>Synopsis %</th><th {TH}>Excerpt %</th><th {TH}>A %</th><th {TH}>B %</th><th {TH}>C %</th><th {TH}>D %</th>'
+    summary_html += f'<th {TH}>Flagged</th></tr></thead><tbody>\n'
 
     for grade in sorted(all_grades.keys()):
         m = all_grades[grade]
@@ -1823,26 +1832,26 @@ def generate_html(all_grades):
         else:
             syn_cell = "N/A"
 
-        summary_html += f'<tr><td><strong>Grade {grade}</strong></td>'
-        summary_html += f'<td>{m["total_articles"]}</td><td>{m["total_questions"]}</td><td>{m["num_units"]}</td>'
-        summary_html += f'<td>{m["literary_pct"]:.0f}%</td><td>{syn_cell}</td><td>{m["excerpt_pct"]:.0f}%</td>'
-        summary_html += f'<td>{a_pct:.0f}%</td><td>{b_pct:.0f}%</td><td>{c_pct:.0f}%</td><td>{d_pct:.0f}%</td>'
-        summary_html += f'<td>{len(m["flagged_items"])}</td></tr>\n'
+        summary_html += f'<tr class="hover:bg-gray-50"><td {TD}><strong>Grade {grade}</strong></td>'
+        summary_html += f'<td {TD}>{m["total_articles"]}</td><td {TD}>{m["total_questions"]}</td><td {TD}>{m["num_units"]}</td>'
+        summary_html += f'<td {TD}>{m["literary_pct"]:.0f}%</td><td {TD}>{syn_cell}</td><td {TD}>{m["excerpt_pct"]:.0f}%</td>'
+        summary_html += f'<td {TD}>{a_pct:.0f}%</td><td {TD}>{b_pct:.0f}%</td><td {TD}>{c_pct:.0f}%</td><td {TD}>{d_pct:.0f}%</td>'
+        summary_html += f'<td {TD}>{len(m["flagged_items"])}</td></tr>\n'
 
     summary_html += '</tbody></table></div></div>\n'
 
     # Curriculum Plan vs Reality Summary (grades 9-12)
     has_plan_data = any(all_grades[g].get("plan_crossref") for g in range(9, 13) if g in all_grades)
     if has_plan_data:
-        summary_html += '<div class="section-card"><h2>Curriculum Plan vs. QTI Reality (Grades 9–12)</h2>\n'
-        summary_html += '<p class="section-note">The high school curriculum plan specifies a comprehensive, well-structured program. '
+        summary_html += '<div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Curriculum Plan vs. QTI Reality (Grades 9–12)</h2>\n'
+        summary_html += '<p class="text-xs text-gray-500 mb-3 italic">The high school curriculum plan specifies a comprehensive, well-structured program. '
         summary_html += 'This table compares the plan to what is actually implemented in the QTI assessment data.</p>\n'
-        summary_html += '<div style="overflow-x:auto;">\n'
-        summary_html += '<table class="data-table"><thead><tr>'
-        summary_html += '<th>Grade</th><th>Planned Texts</th><th>QTI Articles</th>'
-        summary_html += '<th>Matched</th><th>Match %</th><th>Missing</th><th>Custom Needed</th>'
-        summary_html += '<th>Extra in QTI</th><th>Planned Units</th><th>QTI Units</th>'
-        summary_html += '<th>Planned Lexile</th></tr></thead><tbody>\n'
+        summary_html += '<div class="overflow-x-auto">\n'
+        summary_html += f'<table {TABLE}><thead><tr>'
+        summary_html += f'<th {TH}>Grade</th><th {TH}>Planned Texts</th><th {TH}>QTI Articles</th>'
+        summary_html += f'<th {TH}>Matched</th><th {TH}>Match %</th><th {TH}>Missing</th><th {TH}>Custom Needed</th>'
+        summary_html += f'<th {TH}>Extra in QTI</th><th {TH}>Planned Units</th><th {TH}>QTI Units</th>'
+        summary_html += f'<th {TH}>Planned Lexile</th></tr></thead><tbody>\n'
 
         for grade in range(9, 13):
             if grade not in all_grades:
@@ -1854,39 +1863,40 @@ def generate_html(all_grades):
             if not xr or not cp:
                 continue
 
-            match_color = "#43a047" if xr["match_rate"] > 50 else ("#ff6d00" if xr["match_rate"] > 20 else "#e53935")
-            summary_html += f'<tr><td><strong>Grade {grade}</strong></td>'
-            summary_html += f'<td>{cp["total"]}</td><td>{m["total_articles"]}</td>'
-            summary_html += f'<td>{len(xr["found_in_qti"])}</td>'
-            summary_html += f'<td style="color:{match_color};font-weight:600;">{xr["match_rate"]:.0f}%</td>'
-            summary_html += f'<td style="color:#dc3545;">{len(xr["missing_from_qti"])}</td>'
-            summary_html += f'<td style="color:#e67e22;">{len(xr["custom_not_yet_written"])}</td>'
-            summary_html += f'<td>{len(xr["extra_in_qti"])}</td>'
-            summary_html += f'<td>{len(cp["units"])}</td>'
-            summary_html += f'<td style="color:{"#e53935" if m["num_units"] <= 1 else "#43a047"};">{m["num_units"]}</td>'
-            summary_html += f'<td>{pl.get("range", "?")}</td></tr>\n'
+            match_tw = "text-green-600" if xr["match_rate"] > 50 else ("text-orange-600" if xr["match_rate"] > 20 else "text-red-600")
+            unit_tw = "text-red-600" if m["num_units"] <= 1 else "text-green-600"
+            summary_html += f'<tr class="hover:bg-gray-50"><td {TD}><strong>Grade {grade}</strong></td>'
+            summary_html += f'<td {TD}>{cp["total"]}</td><td {TD}>{m["total_articles"]}</td>'
+            summary_html += f'<td {TD}>{len(xr["found_in_qti"])}</td>'
+            summary_html += f'<td class="px-3 py-2 border-b border-gray-200 {match_tw} font-semibold">{xr["match_rate"]:.0f}%</td>'
+            summary_html += f'<td class="px-3 py-2 border-b border-gray-200 text-red-600">{len(xr["missing_from_qti"])}</td>'
+            summary_html += f'<td class="px-3 py-2 border-b border-gray-200 text-orange-500">{len(xr["custom_not_yet_written"])}</td>'
+            summary_html += f'<td {TD}>{len(xr["extra_in_qti"])}</td>'
+            summary_html += f'<td {TD}>{len(cp["units"])}</td>'
+            summary_html += f'<td class="px-3 py-2 border-b border-gray-200 {unit_tw}">{m["num_units"]}</td>'
+            summary_html += f'<td {TD}>{pl.get("range", "?")}</td></tr>\n'
 
         summary_html += '</tbody></table></div></div>\n'
 
     # Cross-grade answer bias chart
-    summary_html += '<div class="section-card"><h2>Answer Distribution Across Grades</h2>\n'
-    summary_html += '<p class="section-note">Expected: 25% per answer. Observed: systematic A/B bias across all grades.</p>\n'
+    summary_html += '<div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Distribution Across Grades</h2>\n'
+    summary_html += '<p class="text-xs text-gray-500 mb-3 italic">Expected: 25% per answer. Observed: systematic A/B bias across all grades.</p>\n'
     for grade in sorted(all_grades.keys()):
         m = all_grades[grade]
-        summary_html += f'<div style="margin:12px 0;"><strong>Grade {grade}</strong><div style="display:flex;gap:4px;margin-top:4px;">'
-        for i, (label, color) in enumerate(zip(["A", "B", "C", "D"], ["#2979ff", "#43a047", "#ff9100", "#e53935"])):
+        summary_html += f'<div class="my-3"><strong>Grade {grade}</strong><div class="flex gap-1 mt-1">'
+        for i, (label, bg_cls) in enumerate(zip(["A", "B", "C", "D"], ["bg-blue-500", "bg-emerald-500", "bg-amber-500", "bg-red-500"])):
             pct = (m["answer_distribution"].get(i, 0) / m["answer_total"] * 100) if m["answer_total"] else 0
             summary_html += (
-                f'<div style="flex:1;text-align:center;">'
-                f'<div style="background:{color};height:{max(pct * 2, 2):.0f}px;border-radius:3px;"></div>'
-                f'<div style="font-size:11px;margin-top:2px;">{label}: {pct:.0f}%</div></div>'
+                f'<div class="flex-1 text-center">'
+                f'<div class="rounded {bg_cls}" style="height:{max(pct * 2, 2):.0f}px;"></div>'
+                f'<div class="text-[11px] mt-0.5">{label}: {pct:.0f}%</div></div>'
             )
         summary_html += '</div></div>\n'
     summary_html += '</div>\n'
 
     # Global weaknesses
-    summary_html += '<div class="section-card"><h2>Systemic Weaknesses (All Grades)</h2>\n'
-    summary_html += '<ul class="weaknesses-list">\n'
+    summary_html += '<div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Systemic Weaknesses (All Grades)</h2>\n'
+    summary_html += '<ul class="list-none">\n'
     global_weaknesses = [
         "Answer key bias is consistent across ALL grades — correct answers cluster in positions A and B, "
         "with C and D almost never correct. This is a systemic design flaw that compromises assessment integrity.",
@@ -1911,7 +1921,7 @@ def generate_html(all_grades):
         "no thematic organization, and a very different text selection from what the plan specifies.",
     ]
     for w in global_weaknesses:
-        summary_html += f'<li>{escape(w)}</li>\n'
+        summary_html += f'<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-[\'\\2717_\'] before:font-bold before:text-red-600">{escape(w)}</li>\n'
     summary_html += '</ul></div>\n'
 
     summary_html += '</div>\n'
@@ -1923,175 +1933,44 @@ def generate_html(all_grades):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alpha Read Analysis Report</title>
+<link rel="stylesheet" href="output.css">
 <style>
-* {{ margin: 0; padding: 0; box-sizing: border-box; }}
-body {{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #eef2f7;
-    color: #1a1a2e;
-    line-height: 1.6;
-}}
-.header {{
-    background: linear-gradient(135deg, #1a237e, #2979ff);
-    color: white;
-    padding: 24px 32px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}}
-.header h1 {{ font-size: 24px; font-weight: 600; }}
-.header p {{ font-size: 14px; opacity: 0.85; margin-top: 4px; }}
+/* Minimal styles for things Tailwind can't handle */
 .tab-bar {{
-    display: flex;
-    gap: 0;
-    padding: 0 24px;
-    background: #fff;
-    border-bottom: 2px solid #e9ecef;
-    overflow-x: auto;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }}
 .tab-btn {{
-    padding: 12px 18px;
     border: none;
     background: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    color: #6c757d;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s;
-    white-space: nowrap;
 }}
-.tab-btn:hover {{ color: #2979ff; background: #e8f0fe; }}
-.tab-btn.active {{ color: #2979ff; border-bottom-color: #2979ff; font-weight: 600; }}
-.content {{ max-width: 1100px; margin: 0 auto; padding: 24px; }}
-.section-card {{
-    background: #fff;
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-}}
-.section-card h2 {{
-    font-size: 18px;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #e9ecef;
-}}
-.section-note {{
-    font-size: 13px;
-    color: #6c757d;
-    margin-bottom: 12px;
-    font-style: italic;
-}}
-.stats-grid {{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 16px;
-}}
-.stat-box {{
-    text-align: center;
-    padding: 16px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}}
-.stat-number {{ font-size: 28px; font-weight: 700; color: #2979ff; }}
-.stat-label {{ font-size: 12px; color: #5f6368; margin-top: 4px; }}
-.warning-text {{ color: #ff6d00 !important; }}
-.data-table {{
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 12px;
-    font-size: 14px;
-}}
-.data-table th {{
-    background: #f8f9fa;
-    padding: 10px 12px;
-    text-align: left;
-    font-weight: 600;
-    color: #2c3e50;
-    border-bottom: 2px solid #dee2e6;
-}}
-.data-table td {{
-    padding: 8px 12px;
-    border-bottom: 1px solid #e9ecef;
-}}
-.data-table tbody tr:hover {{ background: #f8f9fa; }}
-.standards-table .std-none {{ background: #ffcdd2; color: #b71c1c; }}
-.standards-table .std-weak {{ background: #fff3e0; color: #e65100; }}
-.standards-table .std-moderate {{ background: #fff; }}
-.standards-table .std-strong {{ background: #e0f2f1; color: #004d40; }}
-.dev-bad {{ color: #e53935; font-weight: 600; }}
-.dev-warn {{ color: #ff6d00; font-weight: 500; }}
-.dev-ok {{ color: #2e7d32; }}
-.alert {{
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    font-weight: 500;
-}}
-.alert-danger {{ background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }}
-.alert-success {{ background: #e8f5e9; color: #1b5e20; border-left: 4px solid #43a047; }}
-.severity-high {{ color: #c62828; font-weight: 700; }}
-.severity-middle {{ color: #ef6c00; font-weight: 600; }}
-.status-used {{ color: #5f6368; }}
-.status-unused {{ color: #c62828; font-weight: 600; }}
-.flags-cell {{ font-size: 12px; max-width: 250px; }}
-.strengths-list li {{
-    margin: 8px 0;
-    padding-left: 8px;
-    color: #1b5e20;
-    list-style: none;
-}}
-.strengths-list li::before {{ content: "✓ "; font-weight: bold; color: #43a047; }}
-.weaknesses-list li {{
-    margin: 10px 0;
-    padding-left: 8px;
-    color: #b71c1c;
-    list-style: none;
-    line-height: 1.5;
-}}
-.weaknesses-list li::before {{ content: "✗ "; font-weight: bold; color: #e53935; }}
-.unit-list {{ padding-left: 24px; }}
-.unit-list li {{ margin: 4px 0; font-size: 14px; }}
-.title-list {{ padding-left: 24px; max-height: 300px; overflow-y: auto; }}
-.title-list li {{ font-size: 13px; margin: 2px 0; color: #555; }}
-details {{ margin-top: 12px; }}
-summary {{
-    cursor: pointer;
-    font-size: 13px;
-    color: #2979ff;
-    font-weight: 500;
-}}
-summary:hover {{ text-decoration: underline; }}
-.flagged-table {{ font-size: 13px; }}
-.flagged-table td {{ vertical-align: top; }}
 </style>
 </head>
-<body>
-<div class="header">
-<h1>Alpha Read — Curriculum Analysis Report</h1>
-<p>Grades 3–12 Reading Plans &bull; Generated {__import__('datetime').datetime.now().strftime('%B %d, %Y')}</p>
+<body class="bg-slate-100 text-gray-900 leading-relaxed font-sans">
+<div class="bg-gradient-to-br from-indigo-900 to-blue-500 text-white px-8 py-6 shadow-lg">
+<h1 class="text-2xl font-semibold">Alpha Read — Curriculum Analysis Report</h1>
+<p class="text-sm opacity-85 mt-1">Grades 3–12 Reading Plans &bull; Generated {__import__('datetime').datetime.now().strftime('%B %d, %Y')}</p>
 </div>
-<div class="tab-bar">
-<button class="tab-btn" onclick="showGrade('summary', this)">Summary</button>
+<div class="tab-bar flex px-6 bg-white border-b-2 border-gray-200 overflow-x-auto shadow-sm">
+<button class="tab-btn px-4 py-3 border-b-[3px] border-transparent text-sm font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer whitespace-nowrap transition-all" onclick="showGrade('summary', this)">Summary</button>
 {grade_tabs}
 </div>
-<div class="content">
+<div class="max-w-[1100px] mx-auto p-6">
 {summary_html}
 {grade_panels}
 </div>
 <script>
 function showGrade(grade, btn) {{
     document.querySelectorAll('.grade-panel').forEach(p => p.style.display = 'none');
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => {{
+        b.classList.remove('active', 'text-blue-600', 'border-blue-600', 'font-semibold');
+    }});
     const panel = document.getElementById(grade === 'summary' ? 'summary' : 'grade-' + grade);
     if (panel) panel.style.display = 'block';
-    if (btn) btn.classList.add('active');
+    if (btn) {{
+        btn.classList.add('active', 'text-blue-600', 'border-blue-600', 'font-semibold');
+    }}
 }}
 </script>
 </body>
