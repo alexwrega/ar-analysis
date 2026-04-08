@@ -2223,8 +2223,8 @@ def generate_html(all_grades, context_data=None):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alpha Read Analysis Report</title>
-<link rel="stylesheet" href="output.css">
 <style>
+{open(os.path.join(os.path.dirname(__file__), 'output.css')).read()}
 /* Minimal styles for things Tailwind can't handle */
 .tab-bar {{
     position: sticky;
