@@ -2240,7 +2240,7 @@ def generate_html(all_grades, context_data=None):
 <body class="bg-slate-100 text-gray-900 leading-relaxed font-sans">
 <div class="bg-gradient-to-br from-indigo-900 to-blue-500 text-white px-8 py-6 shadow-lg">
 <h1 class="text-2xl font-semibold">Alpha Read — Curriculum Analysis Report</h1>
-<p class="text-sm opacity-85 mt-1">Grades 3–12 Reading Plans &bull; Generated {__import__('datetime').datetime.now().strftime('%B %d, %Y')}</p>
+<p class="text-sm opacity-85 mt-1">Grades 3–12 Reading Plans &bull; Updated {__import__('datetime').datetime.now().strftime('%B %d, %Y')}</p>
 </div>
 <div class="tab-bar flex px-6 bg-white border-b-2 border-gray-200 overflow-x-auto shadow-sm">
 <button class="tab-btn px-4 py-3 border-b-[3px] border-transparent text-sm font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer whitespace-nowrap transition-all" onclick="showGrade('summary', this)">Summary</button>
