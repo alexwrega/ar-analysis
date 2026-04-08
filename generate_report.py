@@ -1362,6 +1362,200 @@ def analyze_grade(grade, data):
 
 
 # ============================================================================
+# CONTEXTUALIZATION ANALYSIS
+# ============================================================================
+
+# Texts that need contextual introductions, organized by reason category.
+# Each entry: (title_fragment, reason, category)
+# Categories: "satire", "ancient", "mid-excerpt", "primary-source", "philosophical"
+TEXTS_NEEDING_CONTEXT = [
+    # --- Satire / Irony that will be misread ---
+    ("Modest Proposal", "Satirical essay proposing eating children; students may take it literally without knowing the Irish famine context and Swift's satirical intent", "satire"),
+    ("White Man's Burden", "Imperialist ideology poem; without framing, students may read it as sincere praise of colonialism rather than understanding it as a text to critically examine", "satire"),
+    ("Gulliver's Travels", "Swift's darkest satire — rational horses vs. bestial humans is absurd nonsense without knowing Swift's satirical project against human nature", "satire"),
+
+    # --- Ancient / Archaic texts with major cultural distance ---
+    ("Epic of Gilgamesh", "~4,000-year-old Mesopotamian epic; unfamiliar cosmology, names, geography; students need to know this is the oldest surviving literature", "ancient"),
+    ("Iliad", "Ancient Greek epic; students need to know the Trojan War, who Achilles and Hector/Priam are, and the Greek concept of honor (kleos)", "ancient"),
+    ("Ramayana", "Hindu epic; concepts of dharma, the caste system, and the epic's cultural significance in South Asia are essential for comprehension", "ancient"),
+    ("Beowulf", "Anglo-Saxon warrior culture, comitatus, mead-halls — all unfamiliar; even in Heaney's translation, the style is dense and archaic", "ancient"),
+    ("Antigone", "Students must know the Oedipus backstory — Antigone's brothers killed each other, Creon's edict — or the play's central conflict is unintelligible", "ancient"),
+    ("Allegory of the Cave", "Philosophical allegory from 380 BC; without knowing Plato's epistemology framework, students will just see a story about people in a cave", "ancient"),
+    ("In a Bamboo Grove", "12th-century Japanese setting; the Rashomon unreliable-narrator structure needs framing for students to grasp the experiment", "ancient"),
+    ("Rashomon", "12th-century Japanese setting; the Rashomon unreliable-narrator structure needs framing for students to grasp the experiment", "ancient"),
+    ("Prince, Chapters", "Renaissance political philosophy; without the Italian city-state context and that this was practical advice to a real ruler, students miss the point", "ancient"),
+    ("Leviathan", "Dense 17th-century political philosophy; the 'state of nature' concept and social contract theory need pre-teaching", "ancient"),
+    ("Don Quixote", "The first modern novel; students need to know Quixote has been driven mad by chivalric romances — the comedy depends on this irony", "ancient"),
+    ("Paradise Lost", "Milton's blank verse is extremely dense; students need the biblical Fall framework and the radical idea that Satan is the protagonist", "ancient"),
+    ("Rime of the Ancient Mariner", "Archaic diction, supernatural framework, and Romantic-era ballad conventions all need framing before reading", "ancient"),
+    ("Utopia", "The satirical intent (is More serious or ironic?) is famously ambiguous; students need the 16th-century English context to engage", "ancient"),
+    ("Excerpt from We", "1924 Soviet-era Russian dystopia; students need to know it was banned in the USSR, influenced Orwell, and pioneered the genre", "ancient"),
+    ("Season of Migration", "Sudanese postcolonial novel deliberately reverses Heart of Darkness; without knowing Conrad's work, the inversion is lost", "ancient"),
+    ("Metamorphosis", "Kafkaesque alienation as a literary concept; without framing, the insect transformation reads as horror rather than existentialist parable", "ancient"),
+    ("Metamorphoses", "Ovid's Roman mythology collection (8 AD); students need to know the cultural context and that this is a source for Romeo and Juliet", "ancient"),
+    ("Apology of Socrates", "Students need to know Socrates was on trial for his life and what the charges of impiety and corrupting youth meant in Athens", "philosophical"),
+    ("Myth of Sisyphus", "Absurdist philosophy; without the framework, students will be confused by the claim that we should 'imagine Sisyphus happy'", "philosophical"),
+    ("Waiting for Godot", "Theatre of the Absurd conventions; without knowing this is intentionally plotless, students will think the play is broken", "philosophical"),
+    ("Stranger", "Meursault's detachment will read as bad writing rather than existentialist philosophy without a Camus/absurdism introduction", "philosophical"),
+    ("Mrs. Dalloway", "Stream of consciousness with no traditional plot markers; students need to know about Woolf's technique and the shell-shock parallel narrative (Septimus)", "philosophical"),
+
+    # --- Mid-work excerpts (dropped into middle of longer works) ---
+    ("Odyssey, Books 21", "Drops into the climactic return scene; students need to know who Odysseus is, the Trojan War, the suitors occupying his palace, and Penelope's test", "mid-excerpt"),
+    ("Odyssey, Books 9", "Students need the Trojan War context, Odysseus's identity, and that these are stories he tells while detained by the Phaeacians", "mid-excerpt"),
+    ("Mockingbird, Chapters 17", "The trial scene requires knowing Tom Robinson, Atticus's role, the Ewell family, and Maycomb's racial dynamics", "mid-excerpt"),
+    ("Lesson Before Dying, Chapters 12", "Jefferson's journal entries are meaningless without knowing his conviction, Grant's visits, and the devastating 'hog' speech", "mid-excerpt"),
+    ("1984, Part 2, Chapter 9", "Goldstein's book and the final Room 101 scene; without Part 1, students won't understand Winston, Big Brother, or what's at stake", "mid-excerpt"),
+    ("1984, Part 2 (Chapters 1", "Winston and Julia's rebellion requires knowing the world of Oceania, the Party, and Winston's growing dissent from Part 1", "mid-excerpt"),
+    ("1984, Part 3", "Room 101 and the conclusion; the total destruction of Winston's identity requires understanding the full arc of his resistance", "mid-excerpt"),
+    ("Julius Caesar, Act III", "The assassination and funeral speeches require knowing the conspirators, Caesar's rise, and Roman Republic political dynamics", "mid-excerpt"),
+    ("Life of Pi, Chapters 37", "The Pacific survival narrative is incomprehensible without knowing Pi's background, the zoo, and the shipwreck", "mid-excerpt"),
+    ("Life of Pi, Chapters 96", "The 'two stories' climax — 'which is the better story?' — requires the entire preceding narrative to have impact", "mid-excerpt"),
+    ("Heart of Darkness, Chapters 1", "Conrad's frame narrative and delayed entrance of Kurtz; students need the colonial Congo context and Marlow's role", "mid-excerpt"),
+    ("Frankenstein, Chapters 11", "The Creature's narrative requires knowing Victor's creation and abandonment from earlier chapters", "mid-excerpt"),
+    ("Frankenstein, Chapters 20", "The consequences and tragedy require knowing Victor's promise to create a mate and his decision to destroy it", "mid-excerpt"),
+    ("Macbeth, Act II", "The murder and its consequences require Act I's prophecy, Lady Macbeth's persuasion, and Macbeth's ambition", "mid-excerpt"),
+    ("Macbeth, Act V", "'Tomorrow and tomorrow' soliloquy and the fall require knowing the full arc of Macbeth's crimes and guilt", "mid-excerpt"),
+    ("Night, Sections 6", "The death march and liberation section requires knowing Eliezer's family, Auschwitz arrival, and loss of faith", "mid-excerpt"),
+    ("In Cold Blood, Parts 1", "Capote's dual narrative needs framing — the Clutter family and the killers' converging stories", "mid-excerpt"),
+    ("Great Gatsby, Chapters 5", "Gatsby and Daisy's reunion requires knowing Nick, Gatsby's fabricated persona, Daisy's marriage to Tom, and the green light", "mid-excerpt"),
+    ("Great Gatsby, Chapters 8", "Gatsby's death and aftermath require the full arc of his dream and its unraveling", "mid-excerpt"),
+    ("Death of a Salesman, Act II", "Willy Loman's confrontation and Requiem require Act I's setup of his delusions, his sons, and the American Dream", "mid-excerpt"),
+    ("Their Eyes Were Watching God, Chapters 18", "The hurricane climax is the emotional peak; students need Janie's journey through three marriages and Tea Cake's world", "mid-excerpt"),
+    ("Beloved, Part II", "Sethe recognizing Beloved and the 'Sixty Million' section require Part I's ghost-story setup and the revelation of Sethe's past", "mid-excerpt"),
+    ("Beloved, Part One, Chapters 1", "While this is Part I, the novel opens in medias res with '124 was spiteful' — students need Reconstruction-era context and the legacy of slavery", "mid-excerpt"),
+    ("Invisible Man, Prologue", "The Battle Royal scene is violent and disorienting by design — Jim Crow-era racial dynamics and the narrator's situation must be established", "mid-excerpt"),
+    ("As I Lay Dying", "Faulkner's 15 rotating narrators and stream of consciousness are impenetrable without framing the Bundren family and their journey", "mid-excerpt"),
+    ("Hamlet, Act II", "Each subsequent act requires previous context; Act II-III drops into feigned madness and 'To be or not to be' mid-arc", "mid-excerpt"),
+    ("Hamlet, Act IV", "Ophelia's death and the graveyard scene require knowing the full conspiracy, Polonius's murder, and Hamlet's exile", "mid-excerpt"),
+    ("Crucible, Acts III", "Proctor's choice to die for his name requires knowing the Salem accusations, Abigail's manipulation, and Proctor's affair", "mid-excerpt"),
+    ("Romeo and Juliet, Act III", "Mercutio and Tybalt's deaths and banishment require knowing the Montague-Capulet feud and the secret marriage", "mid-excerpt"),
+    ("Romeo and Juliet, Acts IV", "The resolution and tragedy require the full arc of Acts I-III", "mid-excerpt"),
+    ("Things Fall Apart, Part 2", "Okonkwo's exile and the colonial encounter require Part 1's establishment of Igbo culture and Okonkwo's character", "mid-excerpt"),
+    ("Slaughterhouse-Five", "Vonnegut's non-linear anti-war narrative blends WWII memoir with science fiction; students need the Dresden bombing context", "mid-excerpt"),
+    ("Jane Eyre, Chapters 26", "The interrupted wedding and Jane's declaration require knowing Rochester, Thornfield, and the mystery of Bertha", "mid-excerpt"),
+    ("Wuthering Heights, Chapters 9", "Catherine's choice and the death scene require understanding the Heathcliff-Catherine-Edgar triangle and the Yorkshire moors setting", "mid-excerpt"),
+    ("Educated, Chapters 10", "University and transformation sections require knowing Tara's survivalist family, lack of formal schooling, and her father's ideology", "mid-excerpt"),
+    ("Educated, Chapters 28", "Confrontation and resolution require the full arc of Tara's education and family conflict", "mid-excerpt"),
+    ("One Hundred Years of Solitude", "Magical realism; students need to understand the Latin American literary tradition and that the blending of myth and reality is intentional", "mid-excerpt"),
+    ("Kite Runner, Chapters 1", "While this opens the novel, students need the pre-Soviet Afghanistan context and Pashtun-Hazara ethnic dynamics for comprehension", "mid-excerpt"),
+    ("God of Small Things", "India's caste system and the 'Love Laws' are central; students need the Kerala setting and caste context", "mid-excerpt"),
+    ("In the Time of the Butterflies, Part 3", "The reckoning requires knowing the Mirabal sisters, Trujillo's dictatorship, and the resistance movement", "mid-excerpt"),
+    ("Warmth of Other Suns, Part 3", "Robert Pershing Foster's story requires knowing the Great Migration's causes and the three migrant narratives Wilkerson traces", "mid-excerpt"),
+    ("Color Purple, Letters 1", "Celie's early letters require understanding the rural Jim Crow South and the epistolary novel form", "mid-excerpt"),
+    ("Native Son, Book One", "Bigger Thomas's fear requires understanding 1930s Chicago's South Side, the Great Migration, and systemic racial oppression", "mid-excerpt"),
+    ("Grapes of Wrath, Chapters 1", "While Chapter 1 opens the novel, the Dust Bowl context and 1930s dispossession of Plains farmers is essential background", "mid-excerpt"),
+    ("Handmaid's Tale, Chapters 1", "Gilead's theocratic patriarchy; students need to understand this is a dystopian future America and the Republic's gender-based oppression", "mid-excerpt"),
+    ("Brave New World, Chapters 1", "Huxley's pleasure-dystopia with biotechnology and conditioning needs framing — contrast with Orwell's fear-based control", "mid-excerpt"),
+    ("Children of Men, Chapter 1", "Near-future infertility premise; students need to know the speculative setup that no children have been born for 25 years", "mid-excerpt"),
+
+    # --- Historical primary sources needing political context ---
+    ("Letter from Birmingham Jail", "Students need to know about the Birmingham campaign, why King was jailed, and who the 'white moderate' clergymen were who prompted this letter", "primary-source"),
+    ("On Civil Disobedience", "The Mexican-American War and slavery context that provoked Thoreau's essay and his night in jail", "primary-source"),
+    ("Common Sense", "1776 colonial context; why monarchy was being questioned and the radical nature of Paine's argument for independence", "primary-source"),
+    ("Sinners in the Hands", "Great Awakening context; this is a sermon delivered during a religious revival, not a personal threat — the rhetorical purpose matters", "primary-source"),
+    ("Speech After Being Convicted", "Susan B. Anthony's 1872 arrest and trial for the crime of voting while female", "primary-source"),
+    ("Federalist No. 10", "The Constitutional Convention debate; what 'factions' meant in 1787 and why Madison feared direct democracy", "primary-source"),
+    ("Federalist No. 51", "Separation of powers argument; requires understanding the Articles of Confederation's failure and the ratification debate", "primary-source"),
+    ("Ballot or the Bullet", "1964 civil rights context; how Malcolm X's rhetoric and philosophy differed from King's nonviolent approach", "primary-source"),
+    ("Checkers Speech", "Nixon's 1952 TV address; students won't understand why this was revolutionary in the history of media-age politics", "primary-source"),
+    ("Of Plymouth Plantation", "17th-century Puritan worldview and colonial conditions; Bradford's prose style and religious framework need context", "primary-source"),
+    ("Fourth of July", "The devastating irony requires knowing Douglass's audience, the Fugitive Slave Act, and the date (July 5, 1852)", "primary-source"),
+    ("Souls of Black Folk", "'Double consciousness' is a precise theoretical concept from 1903, not casual metaphor — Du Bois's framework needs setup", "primary-source"),
+    ("Letter from Delano", "Cesar Chavez's farmworker movement and the deliberate rhetorical parallel to King's Birmingham letter", "primary-source"),
+    ("Chicago Defender", "Students need to understand the Black press's role in sparking the Great Migration and why these 1916-1920 articles were revolutionary", "primary-source"),
+    ("Declaration of Sentiments", "Modeled on the Declaration of Independence; 1848 Seneca Falls Convention context and the women's suffrage movement", "primary-source"),
+    ("Narrative of the Life of Frederick Douglass", "The institution of slavery, Douglass's status as an escaped slave writing for an abolitionist audience, and the autobiographical genre's political purpose", "primary-source"),
+    ("Incidents in the Life of a Slave Girl", "Harriet Jacobs's gendered experience of slavery; the pseudonym 'Linda Brent' and the political context of publishing a female slave narrative", "primary-source"),
+    ("On the Abolition of the English Department", "Ngũgĩ wa Thiong'o's postcolonial argument about language and cultural imperialism needs the Kenyan independence context", "primary-source"),
+    ("Nobel Lecture", "Wole Soyinka's significance as the first African Nobel laureate in Literature (1986) and Nigerian political context", "primary-source"),
+    ("Autobiography of Malcolm X", "Malcolm X's transformation from street criminal to Nation of Islam leader to global human rights activist — the conversion narrative context", "primary-source"),
+]
+
+CATEGORY_LABELS = {
+    "satire": "Satire/Irony — Will Be Misread",
+    "ancient": "Ancient/Archaic — Major Cultural Distance",
+    "mid-excerpt": "Mid-Work Excerpt — Missing Prior Context",
+    "primary-source": "Historical Primary Source — Political Context Needed",
+    "philosophical": "Philosophical/Experimental — Conceptual Framework Needed",
+}
+
+
+def analyze_contextualization(grade, data):
+    """
+    Analyze each assessment in a grade for contextual introductions.
+    Returns a list of dicts with title, has_context, context_type, reason, first_text.
+    """
+    results = []
+    assessments = get_all_assessments(data)
+
+    for unit_title, assessment in assessments:
+        title = get_assessment_title(assessment)
+
+        # Get the first section's stimulus content
+        first_text = ""
+        tps = assessment.get("test_parts", [])
+        if tps:
+            secs = tps[0].get("sections", [])
+            if secs and secs[0].get("items"):
+                stim = secs[0]["items"][0].get("stimulus", {})
+                if isinstance(stim, dict):
+                    html = stim.get("content_html", "")
+                else:
+                    html = str(stim)
+                first_text = re.sub(r"<[^>]+>", " ", html).strip()
+                first_text = re.sub(r"\s+", " ", first_text)
+
+        # Remove the title from the beginning to get actual content start
+        text_after_title = first_text
+        title_lower = title.lower()
+        if title_lower in first_text[:300].lower():
+            idx = first_text.lower().find(title_lower)
+            text_after_title = first_text[idx + len(title):].strip()
+
+        # Check if this text has a contextual introduction
+        check_region = text_after_title[:500].lower()
+        intro_phrases = [
+            "in this excerpt", "this passage", "this story takes place",
+            "background:", "context:", "about the author", "about this",
+            "introduction:", "before you read", "before reading",
+            "in this selection", "historical context", "cultural context",
+            "you are about to read", "as you read, consider",
+            "the following excerpt is from", "the following passage is from",
+        ]
+        has_context = False
+        context_note = ""
+        for phrase in intro_phrases:
+            if phrase in check_region:
+                has_context = True
+                context_note = f"Contains '{phrase}' framing"
+                break
+
+        # Check if text matches any entry in TEXTS_NEEDING_CONTEXT
+        needs_context = False
+        reason = ""
+        category = ""
+        for frag, r, cat in TEXTS_NEEDING_CONTEXT:
+            if frag.lower() in title.lower():
+                needs_context = True
+                reason = r
+                category = cat
+                break
+
+        if needs_context:
+            results.append({
+                "title": title,
+                "has_context": has_context,
+                "context_note": context_note,
+                "needs_context": True,
+                "reason": reason,
+                "category": category,
+                "first_200": text_after_title[:200],
+            })
+
+    return results
+
+
+# ============================================================================
 # HTML REPORT GENERATION
 # ============================================================================
 
@@ -1378,7 +1572,7 @@ def pct_bar(pct, bg_class, label=""):
     )
 
 
-def generate_html(all_grades):
+def generate_html(all_grades, context_data=None):
     """Generate the complete HTML report."""
     # Tailwind class constants for tables
     TH = 'class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300"'
@@ -1400,9 +1594,15 @@ def generate_html(all_grades):
         # --- Build grade panel ---
         panel = f'<div id="grade-{grade}" class="grade-panel" style="display:{active_display};">\n'
 
+        # Viewer link
+        if grade <= 8:
+            viewer_url = f"https://alexwrega.github.io/article-viewer/#grade={grade}"
+        else:
+            viewer_url = f"https://alexwrega.github.io/article-viewer-9-12/#grade={grade}"
+
         # Summary
         panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
-        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Grade {grade} — Overview</h2>\n'
+        panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Grade {grade} — Overview <a href="{viewer_url}" target="_blank" class="ml-2 text-sm font-normal text-blue-500 hover:text-blue-700 hover:underline">View articles &rarr;</a></h2>\n'
         panel += f'<div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-4">\n'
         panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{m["total_articles"]}</div><div class="text-xs text-gray-500 mt-1">Articles</div></div>\n'
         panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{m["total_questions"]}</div><div class="text-xs text-gray-500 mt-1">Questions</div></div>\n'
@@ -1415,9 +1615,9 @@ def generate_html(all_grades):
         else:
             pl_info = PLANNED_LEXILE.get(grade)
             if pl_info:
-                panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-orange-600">{pl_info["midpoint"]}</div><div class="text-xs text-gray-500 mt-1">Planned Lexile ({pl_info["range"]})</div></div>\n'
+                panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-pink-600">{pl_info["midpoint"]}</div><div class="text-xs text-gray-500 mt-1">Planned Lexile ({pl_info["range"]})</div></div>\n'
             else:
-                panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-orange-600">N/A</div><div class="text-xs text-gray-500 mt-1">Lexile (no data)</div></div>\n'
+                panel += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-pink-600">N/A</div><div class="text-xs text-gray-500 mt-1">Lexile (no data)</div></div>\n'
         panel += f'</div></div>\n'
 
         # Curriculum Plan vs Reality (grades 9-12 only)
@@ -1476,7 +1676,7 @@ def generate_html(all_grades):
                 panel += f'<td class="px-3 py-2 border-b border-gray-200 text-red-600">No data (all 0)</td><td class="px-3 py-2 border-b border-gray-200 text-red-600">⚠ Cannot verify complexity</td></tr>\n'
 
             panel += f'<tr><td class="px-3 py-2 border-b border-gray-200">Custom Texts Needed</td><td colspan="2" class="px-3 py-2 border-b border-gray-200">{cp["custom_count"]} texts need to be written</td>'
-            panel += f'<td class="px-3 py-2 border-b border-gray-200 text-orange-500">⚠ Not yet created</td></tr>\n'
+            panel += f'<td class="px-3 py-2 border-b border-gray-200 text-pink-500">⚠ Not yet created</td></tr>\n'
             panel += f'</tbody></table>\n'
 
             # Planned unit structure
@@ -1535,7 +1735,7 @@ def generate_html(all_grades):
                 panel += f'</ul></details>\n'
 
             # Match summary
-            panel += f'<div class="mt-4 bg-amber-50 border-l-4 border-orange-600 p-3 rounded-md">\n'
+            panel += f'<div class="mt-4 bg-sky-50 border-l-4 border-sky-600 p-3 rounded-md">\n'
             panel += f'<strong>Plan Match Rate:</strong> {xr["match_rate"]:.0f}% of planned texts found in QTI data '
             panel += f'({len(xr["found_in_qti"])} of {cp["total"]}). '
             panel += f'{len(xr["missing_from_qti"])} published texts are missing, '
@@ -1550,8 +1750,8 @@ def generate_html(all_grades):
         panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Literary vs. Informational Texts</h2>\n'
         panel += f'<p class="text-xs text-gray-500 mb-3 italic">Literary = the text IS a literary work (poem, story, play, myth). '
         panel += f'Informational = everything else, including texts <em>about</em> literary works.</p>\n'
-        panel += pct_bar(m["literary_pct"], "bg-blue-500", "Literary")
-        panel += pct_bar(m["informational_pct"], "bg-red-500", "Info")
+        panel += pct_bar(m["literary_pct"], "bg-blue-400", "Literary")
+        panel += pct_bar(m["informational_pct"], "bg-red-400", "Info")
         panel += f'<table {TABLE}><thead><tr><th {TH}>Type</th><th {TH}>Count</th><th {TH}>Percentage</th></tr></thead><tbody>\n'
         panel += f'<tr class="hover:bg-gray-50"><td {TD}>Literary</td><td {TD}>{m["literary_count"]}</td><td {TD}>{m["literary_pct"]:.1f}%</td></tr>\n'
         panel += f'<tr class="hover:bg-gray-50"><td {TD}>Informational</td><td {TD}>{m["informational_count"]}</td><td {TD}>{m["informational_pct"]:.1f}%</td></tr>\n'
@@ -1581,9 +1781,9 @@ def generate_html(all_grades):
             panel += f'<p class="text-xs text-gray-500 mb-3 italic">Checks whether assessments in literary units present the '
             panel += f'actual original literary work or a curriculum-written synopsis/retelling/educational article about it.</p>\n'
 
-            panel += pct_bar(orig_pct, "bg-emerald-500", "Original")
-            panel += pct_bar(hybrid_pct, "bg-amber-500", "Hybrid")
-            panel += pct_bar(syn_pct, "bg-red-500", "Synopsis")
+            panel += pct_bar(orig_pct, "bg-emerald-400", "Original")
+            panel += pct_bar(hybrid_pct, "bg-cyan-400", "Hybrid")
+            panel += pct_bar(syn_pct, "bg-red-400", "Synopsis")
 
             panel += f'<table {TABLE}><thead><tr><th {TH}>Classification</th><th {TH}>Count</th><th {TH}>Percentage</th><th {TH}>Description</th></tr></thead><tbody>\n'
             panel += f'<tr class="hover:bg-gray-50"><td {TD}><strong>Original Text</strong></td><td {TD}>{orig_n}</td><td {TD}>{orig_pct:.1f}%</td>'
@@ -1612,8 +1812,8 @@ def generate_html(all_grades):
         panel += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
         panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>\n'
         panel += f'<p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>\n'
-        panel += pct_bar(m["excerpt_pct"], "bg-red-500", "Excerpt")
-        panel += pct_bar(m["non_excerpt_pct"], "bg-blue-500", "Complete")
+        panel += pct_bar(m["excerpt_pct"], "bg-red-400", "Excerpt")
+        panel += pct_bar(m["non_excerpt_pct"], "bg-blue-400", "Complete")
         panel += f'<table {TABLE}><thead><tr><th {TH}>Type</th><th {TH}>Count</th><th {TH}>Percentage</th></tr></thead><tbody>\n'
         panel += f'<tr class="hover:bg-gray-50"><td {TD}>Excerpt</td><td {TD}>{m["excerpt_count"]}</td><td {TD}>{m["excerpt_pct"]:.1f}%</td></tr>\n'
         panel += f'<tr class="hover:bg-gray-50"><td {TD}>Non-Excerpt</td><td {TD}>{m["non_excerpt_count"]}</td><td {TD}>{m["non_excerpt_pct"]:.1f}%</td></tr>\n'
@@ -1642,7 +1842,7 @@ def generate_html(all_grades):
         panel += f'<table {TABLE}><thead><tr>'
         panel += f'<th {TH}>Standard</th><th {TH}>Description</th><th {TH}>Questions</th><th {TH}>% of Questions</th><th {TH}>Assessments</th></tr></thead><tbody>\n'
 
-        std_row_map = {"std-none": "bg-red-100 text-red-900", "std-weak": "bg-orange-50 text-orange-800", "std-moderate": "", "std-strong": "bg-teal-50 text-teal-900"}
+        std_row_map = {"std-none": "bg-red-200 text-red-900", "std-weak": "bg-sky-200 text-sky-800", "std-moderate": "", "std-strong": "bg-green-200 text-green-900"}
 
         for std in ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R9", "R10"]:
             s = m["standards"][std]
@@ -1734,14 +1934,14 @@ def generate_html(all_grades):
         panel += f'<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>\n'
 
         labels = ["A", "B", "C", "D"]
-        colors = ["bg-blue-500", "bg-emerald-500", "bg-amber-500", "bg-red-500"]
+        colors = ["bg-blue-400", "bg-emerald-400", "bg-cyan-400", "bg-red-400"]
         for i in range(4):
             count = m["answer_distribution"].get(i, 0)
             pct = (count / m["answer_total"] * 100) if m["answer_total"] else 0
             panel += pct_bar(pct, colors[i], labels[i])
 
         panel += f'<table {TABLE}><thead><tr><th {TH}>Answer</th><th {TH}>Count</th><th {TH}>Percentage</th><th {TH}>Deviation from 25%</th></tr></thead><tbody>\n'
-        dev_classes = {"dev-bad": "text-red-600 font-semibold", "dev-warn": "text-orange-600 font-medium", "dev-ok": "text-green-700"}
+        dev_classes = {"dev-bad": "text-red-600 font-semibold", "dev-warn": "text-pink-600 font-medium", "dev-ok": "text-green-700"}
         for i in range(4):
             count = m["answer_distribution"].get(i, 0)
             pct = (count / m["answer_total"] * 100) if m["answer_total"] else 0
@@ -1766,7 +1966,7 @@ def generate_html(all_grades):
                 panel += f'<table class="w-full border-collapse mt-3 text-[13px]"><thead><tr>'
                 panel += f'<th {TH}>Flagged Title</th><th {TH}>Current Title</th><th {TH}>Prior Status</th><th {TH}>Severity</th><th {TH}>Flags</th><th {TH}>Match</th></tr></thead><tbody>\n'
                 for item in m["flagged_items"]:
-                    sev_class = "text-red-800 font-bold" if item["severity"] == "HIGH" else "text-orange-600 font-semibold"
+                    sev_class = "text-red-800 font-bold" if item["severity"] == "HIGH" else "text-pink-600 font-semibold"
                     status_class = "text-gray-500" if item["status"] == "Used" else "text-red-800 font-semibold"
                     panel += f'<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200 align-top">{escape(item["flagged_title"])}</td>'
                     panel += f'<td class="px-3 py-2 border-b border-gray-200 align-top">{escape(item["current_title"])}</td>'
@@ -1863,14 +2063,14 @@ def generate_html(all_grades):
             if not xr or not cp:
                 continue
 
-            match_tw = "text-green-600" if xr["match_rate"] > 50 else ("text-orange-600" if xr["match_rate"] > 20 else "text-red-600")
+            match_tw = "text-green-600" if xr["match_rate"] > 50 else ("text-pink-600" if xr["match_rate"] > 20 else "text-red-600")
             unit_tw = "text-red-600" if m["num_units"] <= 1 else "text-green-600"
             summary_html += f'<tr class="hover:bg-gray-50"><td {TD}><strong>Grade {grade}</strong></td>'
             summary_html += f'<td {TD}>{cp["total"]}</td><td {TD}>{m["total_articles"]}</td>'
             summary_html += f'<td {TD}>{len(xr["found_in_qti"])}</td>'
             summary_html += f'<td class="px-3 py-2 border-b border-gray-200 {match_tw} font-semibold">{xr["match_rate"]:.0f}%</td>'
             summary_html += f'<td class="px-3 py-2 border-b border-gray-200 text-red-600">{len(xr["missing_from_qti"])}</td>'
-            summary_html += f'<td class="px-3 py-2 border-b border-gray-200 text-orange-500">{len(xr["custom_not_yet_written"])}</td>'
+            summary_html += f'<td class="px-3 py-2 border-b border-gray-200 text-pink-500">{len(xr["custom_not_yet_written"])}</td>'
             summary_html += f'<td {TD}>{len(xr["extra_in_qti"])}</td>'
             summary_html += f'<td {TD}>{len(cp["units"])}</td>'
             summary_html += f'<td class="px-3 py-2 border-b border-gray-200 {unit_tw}">{m["num_units"]}</td>'
@@ -1884,7 +2084,7 @@ def generate_html(all_grades):
     for grade in sorted(all_grades.keys()):
         m = all_grades[grade]
         summary_html += f'<div class="my-3"><strong>Grade {grade}</strong><div class="flex gap-1 mt-1">'
-        for i, (label, bg_cls) in enumerate(zip(["A", "B", "C", "D"], ["bg-blue-500", "bg-emerald-500", "bg-amber-500", "bg-red-500"])):
+        for i, (label, bg_cls) in enumerate(zip(["A", "B", "C", "D"], ["bg-blue-400", "bg-emerald-400", "bg-cyan-400", "bg-red-400"])):
             pct = (m["answer_distribution"].get(i, 0) / m["answer_total"] * 100) if m["answer_total"] else 0
             summary_html += (
                 f'<div class="flex-1 text-center">'
@@ -1926,6 +2126,96 @@ def generate_html(all_grades):
 
     summary_html += '</div>\n'
 
+    # --- Context Analysis Tab ---
+    context_html = '<div id="context" class="grade-panel" style="display:none;">\n'
+    context_html += '<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+    context_html += '<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Contextualization Analysis (Grades 9–12)</h2>\n'
+    context_html += '<p class="text-sm text-gray-600 mb-4">This analysis identifies texts that require a contextual introduction paragraph '
+    context_html += 'before students begin reading. Without proper framing, students may misunderstand the text, miss critical context, '
+    context_html += 'or be unable to engage meaningfully with the material.</p>\n'
+
+    if context_data:
+        # Summary stats
+        total_flagged = sum(len(v) for v in context_data.values())
+        has_context_count = sum(1 for v in context_data.values() for e in v if e["has_context"])
+        no_context_count = total_flagged - has_context_count
+
+        context_html += '<div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-4 mb-6">\n'
+        context_html += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">{total_flagged}</div><div class="text-xs text-gray-500 mt-1">Texts Needing Context</div></div>\n'
+        context_html += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-red-500">{no_context_count}</div><div class="text-xs text-gray-500 mt-1">Missing Context</div></div>\n'
+        context_html += f'<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-emerald-500">{has_context_count}</div><div class="text-xs text-gray-500 mt-1">Has Some Context</div></div>\n'
+        context_html += '</div>\n'
+        context_html += '</div>\n'
+
+        # Category legend
+        context_html += '<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+        context_html += '<h3 class="text-base font-semibold text-indigo-900 mb-3">Categories</h3>\n'
+        cat_colors = {
+            "satire": ("bg-purple-100 text-purple-800", "bg-purple-400"),
+            "ancient": ("bg-sky-100 text-sky-800", "bg-sky-400"),
+            "mid-excerpt": ("bg-blue-100 text-blue-800", "bg-blue-400"),
+            "primary-source": ("bg-teal-100 text-teal-800", "bg-teal-400"),
+            "philosophical": ("bg-rose-100 text-rose-800", "bg-rose-400"),
+        }
+        context_html += '<div class="flex flex-wrap gap-3 mb-2">\n'
+        for cat_key, cat_label in CATEGORY_LABELS.items():
+            badge_cls = cat_colors.get(cat_key, ("bg-gray-100 text-gray-800", "bg-gray-500"))[0]
+            context_html += f'<span class="text-xs px-2.5 py-1 rounded-full font-medium {badge_cls}">{escape(cat_label)}</span>\n'
+        context_html += '</div>\n'
+        context_html += '</div>\n'
+
+        # Per-grade tables
+        for grade in sorted(context_data.keys()):
+            entries = context_data[grade]
+            if not entries:
+                continue
+
+            grade_no_ctx = sum(1 for e in entries if not e["has_context"])
+            grade_has_ctx = sum(1 for e in entries if e["has_context"])
+
+            context_html += f'<div class="bg-white rounded-lg p-6 mb-5 shadow-sm">\n'
+            context_html += f'<h2 class="text-lg font-semibold text-indigo-900 mb-2 pb-2 border-b-2 border-gray-200">Grade {grade}</h2>\n'
+            context_html += f'<p class="text-xs text-gray-500 mb-4">{len(entries)} texts identified &mdash; '
+            context_html += f'<span class="text-red-600 font-semibold">{grade_no_ctx} missing context</span>'
+            if grade_has_ctx:
+                context_html += f', <span class="text-emerald-600 font-semibold">{grade_has_ctx} have some context</span>'
+            context_html += '</p>\n'
+
+            context_html += f'<table {TABLE}>\n'
+            context_html += f'<thead><tr><th {TH}>Text</th><th {TH}>Category</th><th {TH}>Context?</th><th {TH}>Why Context Is Needed</th></tr></thead>\n'
+            context_html += '<tbody>\n'
+
+            for entry in entries:
+                badge_cls = cat_colors.get(entry["category"], ("bg-gray-100 text-gray-800", "bg-gray-500"))[0]
+                cat_short = CATEGORY_LABELS.get(entry["category"], entry["category"]).split(" — ")[0]
+
+                if entry["has_context"]:
+                    status = f'<span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">Partial</span>'
+                    status += f'<div class="text-[11px] text-gray-500 mt-1">{escape(entry["context_note"])}</div>'
+                else:
+                    status = '<span class="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-medium">None</span>'
+
+                row_bg = "" if not entry["has_context"] else ""
+                context_html += f'<tr class="hover:bg-gray-50 align-top">'
+                context_html += f'<td {TD}><strong class="text-sm">{escape(entry["title"][:80])}</strong>'
+                # Show first line of actual text
+                preview = entry["first_200"][:120].strip()
+                if preview:
+                    context_html += f'<div class="text-[11px] text-gray-400 mt-1 italic">Starts: {escape(preview)}...</div>'
+                context_html += f'</td>'
+                context_html += f'<td {TD}><span class="text-[11px] px-2 py-0.5 rounded-full font-medium {badge_cls}">{escape(cat_short)}</span></td>'
+                context_html += f'<td {TD}>{status}</td>'
+                context_html += f'<td {TD}><span class="text-sm">{escape(entry["reason"])}</span></td>'
+                context_html += f'</tr>\n'
+
+            context_html += '</tbody></table>\n'
+            context_html += '</div>\n'
+    else:
+        context_html += '<p class="text-gray-500 italic">Context analysis not available (grades 9–12 data required).</p>\n'
+        context_html += '</div>\n'
+
+    context_html += '</div>\n'
+
     # Assemble full HTML
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1955,10 +2245,12 @@ def generate_html(all_grades):
 <div class="tab-bar flex px-6 bg-white border-b-2 border-gray-200 overflow-x-auto shadow-sm">
 <button class="tab-btn px-4 py-3 border-b-[3px] border-transparent text-sm font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer whitespace-nowrap transition-all" onclick="showGrade('summary', this)">Summary</button>
 {grade_tabs}
+<button class="tab-btn px-4 py-3 border-b-[3px] border-transparent text-sm font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer whitespace-nowrap transition-all" onclick="showGrade('context', this)">Context</button>
 </div>
 <div class="max-w-[1100px] mx-auto p-6">
 {summary_html}
 {grade_panels}
+{context_html}
 </div>
 <script>
 function showGrade(grade, btn) {{
@@ -1966,11 +2258,12 @@ function showGrade(grade, btn) {{
     document.querySelectorAll('.tab-btn').forEach(b => {{
         b.classList.remove('active', 'text-blue-600', 'border-blue-600', 'font-semibold');
     }});
-    const panel = document.getElementById(grade === 'summary' ? 'summary' : 'grade-' + grade);
+    const panel = document.getElementById(grade === 'summary' || grade === 'context' ? grade : 'grade-' + grade);
     if (panel) panel.style.display = 'block';
     if (btn) {{
         btn.classList.add('active', 'text-blue-600', 'border-blue-600', 'font-semibold');
     }}
+    window.scrollTo(0, 0);
 }}
 </script>
 </body>
@@ -2020,8 +2313,18 @@ def main():
                   f"{m['literary_pct']:.0f}% literary, {m['excerpt_pct']:.0f}% excerpts, "
                   f"{len(m['flagged_items'])} flagged")
 
+    # Contextualization analysis for grades 9-12
+    print("\nRunning contextualization analysis (grades 9-12)...")
+    context_data = {}
+    for grade in range(9, 13):
+        data = load_grade_data(grade)
+        ctx = analyze_contextualization(grade, data)
+        context_data[grade] = ctx
+        no_ctx = sum(1 for e in ctx if not e["has_context"])
+        print(f"  Grade {grade}: {len(ctx)} texts need context, {no_ctx} missing it")
+
     print("\nGenerating HTML report...")
-    html = generate_html(all_grades)
+    html = generate_html(all_grades, context_data=context_data)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write(html)
