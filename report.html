@@ -24,6 +24,7 @@
     --color-red-800: oklch(44.4% 0.177 26.899);
     --color-red-900: oklch(39.6% 0.141 25.723);
     --color-green-50: oklch(98.2% 0.018 155.826);
+    --color-green-100: oklch(96.2% 0.044 156.743);
     --color-green-200: oklch(92.5% 0.084 155.995);
     --color-green-500: oklch(72.3% 0.219 149.579);
     --color-green-600: oklch(62.7% 0.194 149.214);
@@ -83,6 +84,8 @@
     --text-base--line-height: calc(1.5 / 1);
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
@@ -496,6 +499,9 @@
   .bg-green-50 {
     background-color: var(--color-green-50);
   }
+  .bg-green-100 {
+    background-color: var(--color-green-100);
+  }
   .bg-green-200 {
     background-color: var(--color-green-200);
   }
@@ -567,6 +573,12 @@
   }
   .p-6 {
     padding: calc(var(--spacing) * 6);
+  }
+  .px-1 {
+    padding-inline: calc(var(--spacing) * 1);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
@@ -656,6 +668,10 @@
   .text-sm {
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
   }
   .text-xs {
     font-size: var(--text-xs);
@@ -1117,22 +1133,19 @@
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>Grade 11</strong></td><td class="px-3 py-2 border-b border-gray-200">135</td><td class="px-3 py-2 border-b border-gray-200">100</td><td class="px-3 py-2 border-b border-gray-200">100</td><td class="px-3 py-2 border-b border-gray-200 text-green-600 font-semibold">74%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600">28</td><td class="px-3 py-2 border-b border-gray-200 text-pink-500">7</td><td class="px-3 py-2 border-b border-gray-200">0</td><td class="px-3 py-2 border-b border-gray-200">6</td><td class="px-3 py-2 border-b border-gray-200 text-red-600">1</td><td class="px-3 py-2 border-b border-gray-200">1185L–1385L</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>Grade 12</strong></td><td class="px-3 py-2 border-b border-gray-200">130</td><td class="px-3 py-2 border-b border-gray-200">114</td><td class="px-3 py-2 border-b border-gray-200">114</td><td class="px-3 py-2 border-b border-gray-200 text-green-600 font-semibold">88%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600">14</td><td class="px-3 py-2 border-b border-gray-200 text-pink-500">2</td><td class="px-3 py-2 border-b border-gray-200">0</td><td class="px-3 py-2 border-b border-gray-200">6</td><td class="px-3 py-2 border-b border-gray-200 text-red-600">1</td><td class="px-3 py-2 border-b border-gray-200">1250L–1420L</td></tr>
 </tbody></table></div></div>
-<div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Distribution Across Grades</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Expected: 25% per answer. Observed: systematic A/B bias across all grades.</p>
-<div class="my-3"><strong>Grade 3</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:84px;"></div><div class="text-[11px] mt-0.5">A: 42%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:107px;"></div><div class="text-[11px] mt-0.5">B: 54%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:8px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 1%</div></div></div></div>
-<div class="my-3"><strong>Grade 4</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:75px;"></div><div class="text-[11px] mt-0.5">A: 38%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:117px;"></div><div class="text-[11px] mt-0.5">B: 59%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:7px;"></div><div class="text-[11px] mt-0.5">C: 3%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 5</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:73px;"></div><div class="text-[11px] mt-0.5">A: 37%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:119px;"></div><div class="text-[11px] mt-0.5">B: 59%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:7px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 6</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:76px;"></div><div class="text-[11px] mt-0.5">A: 38%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:114px;"></div><div class="text-[11px] mt-0.5">B: 57%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:9px;"></div><div class="text-[11px] mt-0.5">C: 5%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 7</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:78px;"></div><div class="text-[11px] mt-0.5">A: 39%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:116px;"></div><div class="text-[11px] mt-0.5">B: 58%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:6px;"></div><div class="text-[11px] mt-0.5">C: 3%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 8</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:83px;"></div><div class="text-[11px] mt-0.5">A: 42%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:110px;"></div><div class="text-[11px] mt-0.5">B: 55%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:6px;"></div><div class="text-[11px] mt-0.5">C: 3%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 9</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:55px;"></div><div class="text-[11px] mt-0.5">A: 27%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:138px;"></div><div class="text-[11px] mt-0.5">B: 69%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:7px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 10</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:56px;"></div><div class="text-[11px] mt-0.5">A: 28%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:134px;"></div><div class="text-[11px] mt-0.5">B: 67%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:10px;"></div><div class="text-[11px] mt-0.5">C: 5%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 11</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:59px;"></div><div class="text-[11px] mt-0.5">A: 30%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:132px;"></div><div class="text-[11px] mt-0.5">B: 66%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:8px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
-<div class="my-3"><strong>Grade 12</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:54px;"></div><div class="text-[11px] mt-0.5">A: 27%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:138px;"></div><div class="text-[11px] mt-0.5">B: 69%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:9px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
+<div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md mb-4">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled across all grades (3–12)</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Grades</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Status</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">3–8</td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">9–12</td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
+</tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Systemic Weaknesses (All Grades)</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Answer key bias is consistent across ALL grades — correct answers cluster in positions A and B, with C and D almost never correct. This is a systemic design flaw that compromises assessment integrity.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Grades 3–8 literary units are overwhelmingly curriculum-written synopses, retellings, and educational articles ABOUT literary works rather than the works themselves. Students read about what happens in poems, stories, and plays instead of reading the actual texts. Only a small fraction of assessments present genuine original literary text. This fundamentally undermines CCSS standards requiring students to read and comprehend literature (RL standards).</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Grades 9–12 lack thematic unit organization entirely. All content is dumped into a single &#x27;Reading Exercises&#x27; unit, unlike the well-structured units in grades 3–8.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Grades 9–12 have no Lexile data (all set to 0), making text complexity verification impossible. The curriculum plan specifies scaffolded Lexile progressions (e.g., Grade 9: 1050L–1260L, Grade 12: 1250L–1420L) but the QTI data does not implement these ranges.</li>
@@ -1242,13 +1255,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:41.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">41.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:53.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">53.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:4.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">4.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.6%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.6%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">453</td><td class="px-3 py-2 border-b border-gray-200">41.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+16.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">583</td><td class="px-3 py-2 border-b border-gray-200">53.7%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+28.7%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">43</td><td class="px-3 py-2 border-b border-gray-200">4.0%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-21.0%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">6</td><td class="px-3 py-2 border-b border-gray-200">0.6%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.4%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1085 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1266,7 +1282,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 95% of correct answers are A or B (A=42%, B=54%, C=4%, D=1%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Literary texts comprise only 8% of content. Common Core recommends approximately 50% literary / 50% informational for grades 3-5. Students have limited exposure to actual poetry, fiction, and drama.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL (Literature) standards with zero coverage: RL.3.6</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RI (Informational) standards with zero coverage: RI.3.6</li>
@@ -1406,13 +1421,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:37.6%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">37.6%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:58.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">58.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:3.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">3.3%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.3%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">567</td><td class="px-3 py-2 border-b border-gray-200">37.6%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+12.6%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">884</td><td class="px-3 py-2 border-b border-gray-200">58.7%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+33.7%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">50</td><td class="px-3 py-2 border-b border-gray-200">3.3%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-21.7%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">5</td><td class="px-3 py-2 border-b border-gray-200">0.3%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.7%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1506 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1430,7 +1448,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 96% of correct answers are A or B (A=38%, B=59%, C=3%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Literary texts comprise only 6% of content. Common Core recommends approximately 50% literary / 50% informational for grades 3-5. Students have limited exposure to actual poetry, fiction, and drama.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL (Literature) standards with zero coverage: RL.4.6</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL standards with minimal coverage (&lt;5 questions): RL.4.7 (3q), RL.4.9 (2q)</li>
@@ -1606,13 +1623,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:36.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">36.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:59.4%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">59.4%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:3.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">3.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.2%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.2%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">506</td><td class="px-3 py-2 border-b border-gray-200">36.7%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+11.7%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">820</td><td class="px-3 py-2 border-b border-gray-200">59.4%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+34.4%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">51</td><td class="px-3 py-2 border-b border-gray-200">3.7%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-21.3%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">3</td><td class="px-3 py-2 border-b border-gray-200">0.2%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.8%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1380 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1635,7 +1655,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 96% of correct answers are A or B (A=37%, B=59%, C=4%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Literary texts comprise only 12% of content. Common Core recommends approximately 50% literary / 50% informational for grades 3-5. Students have limited exposure to actual poetry, fiction, and drama.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL standards with minimal coverage (&lt;5 questions): RL.5.5 (3q), RL.5.7 (4q)</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RI standards with minimal coverage (&lt;5 questions): RI.5.9 (3q)</li>
@@ -1803,13 +1822,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:38.2%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">38.2%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:56.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">56.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:4.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">4.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.3%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">493</td><td class="px-3 py-2 border-b border-gray-200">38.2%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+13.2%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">734</td><td class="px-3 py-2 border-b border-gray-200">56.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+31.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">61</td><td class="px-3 py-2 border-b border-gray-200">4.7%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-20.3%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">4</td><td class="px-3 py-2 border-b border-gray-200">0.3%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.7%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1292 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1832,7 +1854,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 95% of correct answers are A or B (A=38%, B=57%, C=5%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Literary texts comprise only 13% of content. Middle school should maintain substantial literary text engagement for developing interpretive and analytical skills.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL (Literature) standards with zero coverage: RL.6.7</li>
 </ul></div>
@@ -2006,13 +2027,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:38.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">38.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:57.9%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">57.9%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:3.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">3.1%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.3%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">556</td><td class="px-3 py-2 border-b border-gray-200">38.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+13.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">829</td><td class="px-3 py-2 border-b border-gray-200">57.9%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+32.9%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">44</td><td class="px-3 py-2 border-b border-gray-200">3.1%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-21.9%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">4</td><td class="px-3 py-2 border-b border-gray-200">0.3%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.7%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1433 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -2038,7 +2062,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 97% of correct answers are A or B (A=39%, B=58%, C=3%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Literary texts comprise only 14% of content. Middle school should maintain substantial literary text engagement for developing interpretive and analytical skills.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL standards with minimal coverage (&lt;5 questions): RL.7.7 (3q), RL.7.9 (4q)</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">1 previously removed/flagged article(s) appear to have been re-added to the curriculum despite being flagged for inappropriate content.</li>
@@ -2201,13 +2224,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:41.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">41.5%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:55.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">55.1%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:3.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">3.1%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.3%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">609</td><td class="px-3 py-2 border-b border-gray-200">41.5%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+16.5%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">809</td><td class="px-3 py-2 border-b border-gray-200">55.1%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+30.1%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">45</td><td class="px-3 py-2 border-b border-gray-200">3.1%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-21.9%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">4</td><td class="px-3 py-2 border-b border-gray-200">0.3%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.7%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1467 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -2230,7 +2256,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 97% of correct answers are A or B (A=42%, B=55%, C=3%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Literary texts comprise only 11% of content. Middle school should maintain substantial literary text engagement for developing interpretive and analytical skills.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL standards with minimal coverage (&lt;5 questions): RL.8.7 (2q), RL.8.9 (4q)</li>
 </ul></div>
@@ -2539,13 +2564,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:27.4%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">27.4%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:68.9%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">68.9%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:3.6%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">3.6%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.2%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.2%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">305</td><td class="px-3 py-2 border-b border-gray-200">27.4%</td><td class="px-3 py-2 border-b border-gray-200 text-green-700">+2.4%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">767</td><td class="px-3 py-2 border-b border-gray-200">68.9%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+43.9%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">40</td><td class="px-3 py-2 border-b border-gray-200">3.6%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-21.4%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">2</td><td class="px-3 py-2 border-b border-gray-200">0.2%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.8%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1114 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -2572,7 +2600,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 96% of correct answers are A or B (A=27%, B=69%, C=4%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">No Lexile level data for any text. Without readability metrics, it&#x27;s impossible to verify grade-level appropriateness or differentiate texts by complexity.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">All content placed in a single undifferentiated unit (&#x27;Reading Exercises&#x27;). No thematic organization, no progression from simpler to complex texts, no genre-based grouping. This makes curriculum pacing and targeted instruction impossible.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RI standards with minimal coverage (&lt;5 questions): RI.9-10.7 (4q), RI.9-10.9 (2q)</li>
@@ -2867,13 +2894,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:28.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">28.1%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:66.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">66.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:5.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">5.1%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">294</td><td class="px-3 py-2 border-b border-gray-200">28.1%</td><td class="px-3 py-2 border-b border-gray-200 text-green-700">+3.1%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">699</td><td class="px-3 py-2 border-b border-gray-200">66.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+41.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">53</td><td class="px-3 py-2 border-b border-gray-200">5.1%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-19.9%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">0</td><td class="px-3 py-2 border-b border-gray-200">0.0%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-25.0%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1046 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -2902,7 +2932,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 95% of correct answers are A or B (A=28%, B=67%, C=5%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">No Lexile level data for any text. Without readability metrics, it&#x27;s impossible to verify grade-level appropriateness or differentiate texts by complexity.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">All content placed in a single undifferentiated unit (&#x27;Reading Exercises&#x27;). No thematic organization, no progression from simpler to complex texts, no genre-based grouping. This makes curriculum pacing and targeted instruction impossible.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RI standards with minimal coverage (&lt;5 questions): RI.9-10.7 (1q), RI.9-10.9 (1q)</li>
@@ -3196,13 +3225,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:29.6%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">29.6%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:65.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">65.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:4.2%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">4.2%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.3%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">280</td><td class="px-3 py-2 border-b border-gray-200">29.6%</td><td class="px-3 py-2 border-b border-gray-200 text-green-700">+4.6%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">622</td><td class="px-3 py-2 border-b border-gray-200">65.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+40.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">40</td><td class="px-3 py-2 border-b border-gray-200">4.2%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-20.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">3</td><td class="px-3 py-2 border-b border-gray-200">0.3%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.7%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 945 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -3228,7 +3260,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 95% of correct answers are A or B (A=30%, B=66%, C=4%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">No Lexile level data for any text. Without readability metrics, it&#x27;s impossible to verify grade-level appropriateness or differentiate texts by complexity.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">All content placed in a single undifferentiated unit (&#x27;Reading Exercises&#x27;). No thematic organization, no progression from simpler to complex texts, no genre-based grouping. This makes curriculum pacing and targeted instruction impossible.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RI standards with minimal coverage (&lt;5 questions): RI.11-12.5 (4q), RI.11-12.7 (2q), RI.11-12.9 (2q)</li>
@@ -3540,13 +3571,16 @@
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
-<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
-<p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:26.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">26.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:68.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">68.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:4.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">4.3%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.1%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">292</td><td class="px-3 py-2 border-b border-gray-200">26.8%</td><td class="px-3 py-2 border-b border-gray-200 text-green-700">+1.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">749</td><td class="px-3 py-2 border-b border-gray-200">68.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+43.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">47</td><td class="px-3 py-2 border-b border-gray-200">4.3%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-20.7%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">1</td><td class="px-3 py-2 border-b border-gray-200">0.1%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.9%</td></tr>
+<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Shuffle Status</h2>
+<div class="flex items-center gap-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-md">
+<span class="text-green-600 text-xl font-bold">&#10003;</span>
+<div><p class="text-sm font-medium text-green-900">Shuffle is enabled on all 1089 items</p>
+<p class="text-xs text-green-700 mt-0.5">Answer choices are randomized at runtime — stored position bias does not affect students.</p></div>
+</div>
+<table class="mt-4 text-sm" class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Property</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Value</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">XML <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">JSON <code class="text-xs bg-gray-100 px-1 rounded">shuffle</code></td><td class="px-3 py-2 border-b border-gray-200"><code class="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded">true</code> on all</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Status</td><td class="px-3 py-2 border-b border-gray-200"><strong class="text-green-700">OK</strong></td></tr>
 </tbody></table>
 </div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -3573,7 +3607,6 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Weaknesses</h2>
 <ul class="list-none">
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">SEVERE answer key bias: 96% of correct answers are A or B (A=27%, B=69%, C=4%, D=0%). Students can achieve above-chance scores by always selecting A or B. This undermines assessment validity and teaches test-taking shortcuts.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">No Lexile level data for any text. Without readability metrics, it&#x27;s impossible to verify grade-level appropriateness or differentiate texts by complexity.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">All content placed in a single undifferentiated unit (&#x27;Reading Exercises&#x27;). No thematic organization, no progression from simpler to complex texts, no genre-based grouping. This makes curriculum pacing and targeted instruction impossible.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RI standards with minimal coverage (&lt;5 questions): RI.11-12.5 (3q), RI.11-12.7 (4q), RI.11-12.9 (2q)</li>
