@@ -749,6 +749,41 @@ def normalize_title(title):
     return t
 
 
+GERMAN_COMMON_WORDS = {
+    "der", "die", "das", "und", "ist", "ein", "eine", "nicht", "sich", "mit",
+    "auf", "den", "dem", "des", "auch", "für", "werden", "haben", "nach", "über",
+    "kann", "nur", "noch", "diese", "einer", "sind", "wenn", "aber", "wie", "mehr",
+    "durch", "oder", "dass", "sein", "vom", "zum", "zur", "beim", "seine", "seiner",
+    "seinen", "seinem", "ihre", "ihrer", "ihren", "ihrem", "dass", "wird", "wurde",
+    "eines", "einem", "einen", "dieser", "dieses", "diesem", "diesen", "als",
+}
+
+def find_german_articles(assessments):
+    """Detect articles whose stimulus text is written in German instead of English."""
+    german_articles = {}  # title -> german_section_count
+    for _, assessment in assessments:
+        title = get_assessment_title(assessment)
+        german_sections = 0
+        total_sections = 0
+        for tp in assessment.get("test_parts", []):
+            for section in tp.get("sections", []):
+                for item in section.get("items", []):
+                    stim = item.get("stimulus") or {}
+                    text = stim.get("content_text", "")
+                    if not text or len(text) < 100:
+                        continue
+                    total_sections += 1
+                    words = re.findall(r"[a-zäöüß]+", text.lower())
+                    if not words:
+                        continue
+                    german_hits = sum(1 for w in words if w in GERMAN_COMMON_WORDS)
+                    if german_hits / len(words) > 0.15:
+                        german_sections += 1
+        if german_sections > 0:
+            german_articles[title] = {"title": title, "german_section_count": german_sections, "total_sections": total_sections}
+    return list(german_articles.values())
+
+
 def find_flagged_items(assessments, grade):
     """
     Check if any previously flagged items are present in the current data.
@@ -1097,6 +1132,9 @@ def analyze_grade(grade, data):
     # Flagged items
     flagged = find_flagged_items(assessments, grade)
 
+    # German-language detection
+    german_articles = find_german_articles(assessments)
+
     # Unit info
     units = data.get("units", [])
     unit_titles = [u["title"] for u in units]
@@ -1314,6 +1352,16 @@ def analyze_grade(grade, data):
                 f"(severe violence, dark themes, sexual content) are currently present."
             )
 
+    # German-language articles
+    if german_articles:
+        titles = ", ".join(f'"{a["title"]}"' for a in german_articles)
+        total_sections = sum(a["german_section_count"] for a in german_articles)
+        weaknesses.append(
+            f"{len(german_articles)} article(s) contain text written in German instead of English: {titles}. "
+            f"({total_sections} total sections affected.) "
+            f"These appear to be German-language summaries rather than the original English texts."
+        )
+
     # Originality: synopsis vs original text (grades 3-8)
     if grade <= 8 and total_literary_unit_assessments > 0:
         synopsis_count = originality_counts.get("synopsis", 0)
@@ -1358,6 +1406,7 @@ def analyze_grade(grade, data):
         "originality_counts": dict(originality_counts),
         "originality_details": originality_details,
         "total_literary_unit_assessments": total_literary_unit_assessments,
+        "german_articles": german_articles,
     }
 
 
@@ -1813,7 +1862,7 @@ def generate_html(all_grades, context_data=None):
         panel += f'<h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>\n'
         panel += f'<p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>\n'
         panel += pct_bar(m["excerpt_pct"], "bg-red-400", "Excerpt")
-        panel += pct_bar(m["non_excerpt_pct"], "bg-blue-400", "Complete")
+        panel += pct_bar(m["non_excerpt_pct"], "bg-blue-400", "Non-Excerpt")
         panel += f'<table {TABLE}><thead><tr><th {TH}>Type</th><th {TH}>Count</th><th {TH}>Percentage</th></tr></thead><tbody>\n'
         panel += f'<tr class="hover:bg-gray-50"><td {TD}>Excerpt</td><td {TD}>{m["excerpt_count"]}</td><td {TD}>{m["excerpt_pct"]:.1f}%</td></tr>\n'
         panel += f'<tr class="hover:bg-gray-50"><td {TD}>Non-Excerpt</td><td {TD}>{m["non_excerpt_count"]}</td><td {TD}>{m["non_excerpt_pct"]:.1f}%</td></tr>\n'
@@ -2004,6 +2053,12 @@ def generate_html(all_grades, context_data=None):
                 panel += f'<li class="my-1 text-sm">{escape(ut)}</li>\n'
             panel += f'</ol></div>\n'
 
+        # Changelog
+        panel += '<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400">'
+        panel += '<span class="font-medium text-gray-500">Previous versions:</span> '
+        panel += '<a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a>'
+        panel += '</div>\n'
+
         panel += f'</div>\n'  # close grade panel
         grade_panels += panel
 
@@ -2124,6 +2179,12 @@ def generate_html(all_grades, context_data=None):
         summary_html += f'<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-[\'\\2717_\'] before:font-bold before:text-red-600">{escape(w)}</li>\n'
     summary_html += '</ul></div>\n'
 
+    # Changelog
+    summary_html += '<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400">'
+    summary_html += '<span class="font-medium text-gray-500">Previous versions:</span> '
+    summary_html += '<a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a>'
+    summary_html += '</div>\n'
+
     summary_html += '</div>\n'
 
     # --- Context Analysis Tab ---
@@ -2213,6 +2274,12 @@ def generate_html(all_grades, context_data=None):
     else:
         context_html += '<p class="text-gray-500 italic">Context analysis not available (grades 9–12 data required).</p>\n'
         context_html += '</div>\n'
+
+    # Changelog
+    context_html += '<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400">'
+    context_html += '<span class="font-medium text-gray-500">Previous versions:</span> '
+    context_html += '<a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a>'
+    context_html += '</div>\n'
 
     context_html += '</div>\n'
 

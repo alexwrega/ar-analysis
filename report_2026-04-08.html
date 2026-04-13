@@ -253,9 +253,6 @@
   .invisible {
     visibility: hidden;
   }
-  .fixed {
-    position: fixed;
-  }
   .relative {
     position: relative;
   }
@@ -264,9 +261,6 @@
   }
   .mx-auto {
     margin-inline: auto;
-  }
-  .my-0 {
-    margin-block: calc(var(--spacing) * 0);
   }
   .my-0\.5 {
     margin-block: calc(var(--spacing) * 0.5);
@@ -286,9 +280,6 @@
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
   }
-  .mt-0 {
-    margin-top: calc(var(--spacing) * 0);
-  }
   .mt-0\.5 {
     margin-top: calc(var(--spacing) * 0.5);
   }
@@ -303,9 +294,6 @@
   }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
-  }
-  .mt-8 {
-    margin-top: calc(var(--spacing) * 8);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -373,9 +361,6 @@
   .cursor-pointer {
     cursor: pointer;
   }
-  .resize {
-    resize: both;
-  }
   .list-none {
     list-style-type: none;
   }
@@ -418,10 +403,6 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
-  }
-  .border-t {
-    border-top-style: var(--tw-border-style);
-    border-top-width: 1px;
   }
   .border-b {
     border-bottom-style: var(--tw-border-style);
@@ -586,9 +567,6 @@
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
-  .py-0 {
-    padding-block: calc(var(--spacing) * 0);
-  }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
   }
@@ -606,9 +584,6 @@
   }
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
-  }
-  .pt-4 {
-    padding-top: calc(var(--spacing) * 4);
   }
   .pr-2 {
     padding-right: calc(var(--spacing) * 2);
@@ -693,9 +668,6 @@
   }
   .whitespace-nowrap {
     white-space: nowrap;
-  }
-  .text-blue-400 {
-    color: var(--color-blue-400);
   }
   .text-blue-500 {
     color: var(--color-blue-500);
@@ -784,9 +756,6 @@
   .italic {
     font-style: italic;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .opacity-85 {
     opacity: 85%;
   }
@@ -797,10 +766,6 @@
   .shadow-sm {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .transition-all {
     transition-property: all;
@@ -1010,11 +975,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-duration {
   syntax: "*";
   inherits: false;
@@ -1053,7 +1013,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
       --tw-duration: initial;
       --tw-content: "";
     }
@@ -1075,7 +1034,7 @@
 <body class="bg-slate-100 text-gray-900 leading-relaxed font-sans">
 <div class="bg-gradient-to-br from-indigo-900 to-blue-500 text-white px-8 py-6 shadow-lg">
 <h1 class="text-2xl font-semibold">Alpha Read — Curriculum Analysis Report</h1>
-<p class="text-sm opacity-85 mt-1">Grades 3–12 Reading Plans &bull; Updated April 13, 2026</p>
+<p class="text-sm opacity-85 mt-1">Grades 3–12 Reading Plans &bull; Updated April 08, 2026</p>
 </div>
 <div class="tab-bar flex px-6 bg-white border-b-2 border-gray-200 overflow-x-auto shadow-sm">
 <button class="tab-btn px-4 py-3 border-b-[3px] border-transparent text-sm font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer whitespace-nowrap transition-all" onclick="showGrade('summary', this)">Summary</button>
@@ -1097,7 +1056,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Cross-Grade Summary</h2>
 <div class="overflow-x-auto">
 <table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Grade</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Articles</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Questions</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Units</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Literary %</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Synopsis %</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Excerpt %</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">A %</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">B %</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">C %</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">D %</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Flagged</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>Grade 3</strong></td><td class="px-3 py-2 border-b border-gray-200">121</td><td class="px-3 py-2 border-b border-gray-200">1085</td><td class="px-3 py-2 border-b border-gray-200">27</td><td class="px-3 py-2 border-b border-gray-200">8%</td><td class="px-3 py-2 border-b border-gray-200">31%</td><td class="px-3 py-2 border-b border-gray-200">5%</td><td class="px-3 py-2 border-b border-gray-200">42%</td><td class="px-3 py-2 border-b border-gray-200">54%</td><td class="px-3 py-2 border-b border-gray-200">4%</td><td class="px-3 py-2 border-b border-gray-200">1%</td><td class="px-3 py-2 border-b border-gray-200">0</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>Grade 3</strong></td><td class="px-3 py-2 border-b border-gray-200">121</td><td class="px-3 py-2 border-b border-gray-200">1086</td><td class="px-3 py-2 border-b border-gray-200">27</td><td class="px-3 py-2 border-b border-gray-200">8%</td><td class="px-3 py-2 border-b border-gray-200">31%</td><td class="px-3 py-2 border-b border-gray-200">5%</td><td class="px-3 py-2 border-b border-gray-200">42%</td><td class="px-3 py-2 border-b border-gray-200">54%</td><td class="px-3 py-2 border-b border-gray-200">4%</td><td class="px-3 py-2 border-b border-gray-200">1%</td><td class="px-3 py-2 border-b border-gray-200">0</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>Grade 4</strong></td><td class="px-3 py-2 border-b border-gray-200">163</td><td class="px-3 py-2 border-b border-gray-200">1506</td><td class="px-3 py-2 border-b border-gray-200">36</td><td class="px-3 py-2 border-b border-gray-200">6%</td><td class="px-3 py-2 border-b border-gray-200">62%</td><td class="px-3 py-2 border-b border-gray-200">4%</td><td class="px-3 py-2 border-b border-gray-200">38%</td><td class="px-3 py-2 border-b border-gray-200">59%</td><td class="px-3 py-2 border-b border-gray-200">3%</td><td class="px-3 py-2 border-b border-gray-200">0%</td><td class="px-3 py-2 border-b border-gray-200">0</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>Grade 5</strong></td><td class="px-3 py-2 border-b border-gray-200">148</td><td class="px-3 py-2 border-b border-gray-200">1380</td><td class="px-3 py-2 border-b border-gray-200">34</td><td class="px-3 py-2 border-b border-gray-200">12%</td><td class="px-3 py-2 border-b border-gray-200">21%</td><td class="px-3 py-2 border-b border-gray-200">11%</td><td class="px-3 py-2 border-b border-gray-200">37%</td><td class="px-3 py-2 border-b border-gray-200">59%</td><td class="px-3 py-2 border-b border-gray-200">4%</td><td class="px-3 py-2 border-b border-gray-200">0%</td><td class="px-3 py-2 border-b border-gray-200">0</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>Grade 6</strong></td><td class="px-3 py-2 border-b border-gray-200">140</td><td class="px-3 py-2 border-b border-gray-200">1292</td><td class="px-3 py-2 border-b border-gray-200">28</td><td class="px-3 py-2 border-b border-gray-200">13%</td><td class="px-3 py-2 border-b border-gray-200">22%</td><td class="px-3 py-2 border-b border-gray-200">9%</td><td class="px-3 py-2 border-b border-gray-200">38%</td><td class="px-3 py-2 border-b border-gray-200">57%</td><td class="px-3 py-2 border-b border-gray-200">5%</td><td class="px-3 py-2 border-b border-gray-200">0%</td><td class="px-3 py-2 border-b border-gray-200">0</td></tr>
@@ -1119,7 +1078,7 @@
 </tbody></table></div></div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm"><h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Answer Distribution Across Grades</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Expected: 25% per answer. Observed: systematic A/B bias across all grades.</p>
-<div class="my-3"><strong>Grade 3</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:84px;"></div><div class="text-[11px] mt-0.5">A: 42%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:107px;"></div><div class="text-[11px] mt-0.5">B: 54%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:8px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 1%</div></div></div></div>
+<div class="my-3"><strong>Grade 3</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:83px;"></div><div class="text-[11px] mt-0.5">A: 42%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:108px;"></div><div class="text-[11px] mt-0.5">B: 54%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:8px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 1%</div></div></div></div>
 <div class="my-3"><strong>Grade 4</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:75px;"></div><div class="text-[11px] mt-0.5">A: 38%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:117px;"></div><div class="text-[11px] mt-0.5">B: 59%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:7px;"></div><div class="text-[11px] mt-0.5">C: 3%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
 <div class="my-3"><strong>Grade 5</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:73px;"></div><div class="text-[11px] mt-0.5">A: 37%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:119px;"></div><div class="text-[11px] mt-0.5">B: 59%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:7px;"></div><div class="text-[11px] mt-0.5">C: 4%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
 <div class="my-3"><strong>Grade 6</strong><div class="flex gap-1 mt-1"><div class="flex-1 text-center"><div class="rounded bg-blue-400" style="height:76px;"></div><div class="text-[11px] mt-0.5">A: 38%</div></div><div class="flex-1 text-center"><div class="rounded bg-emerald-400" style="height:114px;"></div><div class="text-[11px] mt-0.5">B: 57%</div></div><div class="flex-1 text-center"><div class="rounded bg-cyan-400" style="height:9px;"></div><div class="text-[11px] mt-0.5">C: 5%</div></div><div class="flex-1 text-center"><div class="rounded bg-red-400" style="height:2px;"></div><div class="text-[11px] mt-0.5">D: 0%</div></div></div></div>
@@ -1138,7 +1097,6 @@
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">Grades 9–12 have no Lexile data (all set to 0), making text complexity verification impossible. The curriculum plan specifies scaffolded Lexile progressions (e.g., Grade 9: 1050L–1260L, Grade 12: 1250L–1420L) but the QTI data does not implement these ranges.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">MAJOR GAP between curriculum plan and QTI reality for grades 9–12: The curriculum plan specifies well-organized thematic units (6–7 per grade), scaffolded Lexile progressions, 130–135 carefully selected texts with custom informational articles to be commissioned — but the QTI data implements none of this structure. All content is in a single undifferentiated unit with no Lexile data, no thematic organization, and a very different text selection from what the plan specifies.</li>
 </ul></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 
 <div id="grade-3" class="grade-panel" style="display:block;">
@@ -1146,7 +1104,7 @@
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Grade 3 — Overview <a href="https://alexwrega.github.io/article-viewer/#grade=3" target="_blank" class="ml-2 text-sm font-normal text-blue-500 hover:text-blue-700 hover:underline">View articles &rarr;</a></h2>
 <div class="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-4">
 <div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">121</div><div class="text-xs text-gray-500 mt-1">Articles</div></div>
-<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">1085</div><div class="text-xs text-gray-500 mt-1">Questions</div></div>
+<div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">1086</div><div class="text-xs text-gray-500 mt-1">Questions</div></div>
 <div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">27</div><div class="text-xs text-gray-500 mt-1">Units</div></div>
 <div class="text-center p-4 bg-gray-50 rounded-lg"><div class="text-3xl font-bold text-blue-600">660</div><div class="text-xs text-gray-500 mt-1">Avg Lexile (530–740)</div></div>
 </div></div>
@@ -1199,7 +1157,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:5.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">5.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:95.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">95.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:5.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">5.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:95.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">95.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">6</td><td class="px-3 py-2 border-b border-gray-200">5.0%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">115</td><td class="px-3 py-2 border-b border-gray-200">95.0%</td></tr>
 </tbody></table>
@@ -1229,7 +1187,7 @@
 </tbody></table>
 <h3 class="mt-5 text-indigo-900 font-semibold text-base">RI — Reading Informational Text</h3>
 <table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Standard</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Description</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Questions</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">% of Questions</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Assessments</th></tr></thead><tbody>
-<tr class="bg-green-200 text-green-900"><td class="px-3 py-2 border-b border-gray-200"><strong>RI.3.1</strong></td><td class="px-3 py-2 border-b border-gray-200">Read closely; cite textual evidence to support analysis</td><td class="px-3 py-2 border-b border-gray-200">588</td><td class="px-3 py-2 border-b border-gray-200">54.2%</td><td class="px-3 py-2 border-b border-gray-200">111</td></tr>
+<tr class="bg-green-200 text-green-900"><td class="px-3 py-2 border-b border-gray-200"><strong>RI.3.1</strong></td><td class="px-3 py-2 border-b border-gray-200">Read closely; cite textual evidence to support analysis</td><td class="px-3 py-2 border-b border-gray-200">589</td><td class="px-3 py-2 border-b border-gray-200">54.2%</td><td class="px-3 py-2 border-b border-gray-200">111</td></tr>
 <tr class=""><td class="px-3 py-2 border-b border-gray-200"><strong>RI.3.2</strong></td><td class="px-3 py-2 border-b border-gray-200">Determine theme / central idea; summarize</td><td class="px-3 py-2 border-b border-gray-200">106</td><td class="px-3 py-2 border-b border-gray-200">9.8%</td><td class="px-3 py-2 border-b border-gray-200">87</td></tr>
 <tr class="bg-green-200 text-green-900"><td class="px-3 py-2 border-b border-gray-200"><strong>RI.3.3</strong></td><td class="px-3 py-2 border-b border-gray-200">Analyze how individuals, events, and ideas develop and interact</td><td class="px-3 py-2 border-b border-gray-200">132</td><td class="px-3 py-2 border-b border-gray-200">12.2%</td><td class="px-3 py-2 border-b border-gray-200">84</td></tr>
 <tr class=""><td class="px-3 py-2 border-b border-gray-200"><strong>RI.3.4</strong></td><td class="px-3 py-2 border-b border-gray-200">Determine meaning of words and phrases; figurative language, tone</td><td class="px-3 py-2 border-b border-gray-200">87</td><td class="px-3 py-2 border-b border-gray-200">8.0%</td><td class="px-3 py-2 border-b border-gray-200">75</td></tr>
@@ -1244,9 +1202,9 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Correct Answer Distribution</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Ideal distribution: ~25% each for A, B, C, D.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:41.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">41.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:53.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">53.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:4.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">4.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.6%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.6%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">453</td><td class="px-3 py-2 border-b border-gray-200">41.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+16.8%</td></tr>
-<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">583</td><td class="px-3 py-2 border-b border-gray-200">53.7%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+28.7%</td></tr>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">A</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:41.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">41.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">B</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-emerald-400" style="width:53.8%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">53.8%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">C</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-cyan-400" style="width:4.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">4.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">D</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:0.6%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">0.6%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Answer</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Deviation from 25%</th></tr></thead><tbody>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>A</strong></td><td class="px-3 py-2 border-b border-gray-200">453</td><td class="px-3 py-2 border-b border-gray-200">41.7%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+16.7%</td></tr>
+<tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>B</strong></td><td class="px-3 py-2 border-b border-gray-200">584</td><td class="px-3 py-2 border-b border-gray-200">53.8%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">+28.8%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>C</strong></td><td class="px-3 py-2 border-b border-gray-200">43</td><td class="px-3 py-2 border-b border-gray-200">4.0%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-21.0%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200"><strong>D</strong></td><td class="px-3 py-2 border-b border-gray-200">6</td><td class="px-3 py-2 border-b border-gray-200">0.6%</td><td class="px-3 py-2 border-b border-gray-200 text-red-600 font-semibold">-24.4%</td></tr>
 </tbody></table>
@@ -1304,7 +1262,6 @@
 <li class="my-1 text-sm">Songs</li>
 <li class="my-1 text-sm">Music from Studied Cultures</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-4" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1363,7 +1320,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:3.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">3.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:96.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">96.3%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:3.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">3.7%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:96.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">96.3%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">6</td><td class="px-3 py-2 border-b border-gray-200">3.7%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">157</td><td class="px-3 py-2 border-b border-gray-200">96.3%</td></tr>
 </tbody></table>
@@ -1476,7 +1433,6 @@
 <li class="my-1 text-sm">Composers</li>
 <li class="my-1 text-sm">Songs and Listening</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-5" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1552,7 +1508,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:11.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">11.5%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:88.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">88.5%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:11.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">11.5%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:88.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">88.5%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">17</td><td class="px-3 py-2 border-b border-gray-200">11.5%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">131</td><td class="px-3 py-2 border-b border-gray-200">88.5%</td></tr>
 </tbody></table>
@@ -1678,7 +1634,6 @@
 <li class="my-1 text-sm">American Music</li>
 <li class="my-1 text-sm">Musical Forms</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-6" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1753,7 +1708,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:9.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">9.3%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:90.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">90.7%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:9.3%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">9.3%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:90.7%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">90.7%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">13</td><td class="px-3 py-2 border-b border-gray-200">9.3%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">127</td><td class="px-3 py-2 border-b border-gray-200">90.7%</td></tr>
 </tbody></table>
@@ -1868,7 +1823,6 @@
 <li class="my-1 text-sm">Music of the Classical Period</li>
 <li class="my-1 text-sm">Music of the Romantic Period</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-7" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -1952,7 +1906,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:11.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">11.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:89.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">89.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:11.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">11.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:89.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">89.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">17</td><td class="px-3 py-2 border-b border-gray-200">11.0%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">137</td><td class="px-3 py-2 border-b border-gray-200">89.0%</td></tr>
 </tbody></table>
@@ -2075,7 +2029,6 @@
 <li class="my-1 text-sm">National Identity in Music</li>
 <li class="my-1 text-sm">American Musical Traditions</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-8" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -2150,7 +2103,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:8.9%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">8.9%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:91.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">91.1%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:8.9%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">8.9%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:91.1%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">91.1%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">14</td><td class="px-3 py-2 border-b border-gray-200">8.9%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">144</td><td class="px-3 py-2 border-b border-gray-200">91.1%</td></tr>
 </tbody></table>
@@ -2268,7 +2221,6 @@
 <li class="my-1 text-sm">Vocal Music: Opera</li>
 <li class="my-1 text-sm">Vocal Music: American Musical Theater</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-9" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -2451,7 +2403,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:42.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">42.5%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:57.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">57.5%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:42.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">42.5%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:57.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">57.5%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">51</td><td class="px-3 py-2 border-b border-gray-200">42.5%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">69</td><td class="px-3 py-2 border-b border-gray-200">57.5%</td></tr>
 </tbody></table>
@@ -2579,14 +2531,12 @@
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL.9-10.10 / RI.9-10.10: No Lexile data to verify grade-level text complexity. Cannot assess whether students are reading at appropriate complexity levels.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">2 previously removed/flagged article(s) appear to have been re-added to the curriculum despite being flagged for inappropriate content.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">4 article(s) with HIGH-severity content flags (severe violence, dark themes, sexual content) are currently present.</li>
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">1 article(s) contain text written in German instead of English: &quot;Excerpt from To Kill a Mockingbird, Chapters 17–21 (The Trial)&quot;. (6 total sections affected.) These appear to be German-language summaries rather than the original English texts.</li>
 </ul></div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Units</h2>
 <ol class="pl-6">
 <li class="my-1 text-sm">Reading Exercises</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-10" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -2785,7 +2735,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:40.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">40.5%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:59.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">59.5%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:40.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">40.5%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:59.5%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">59.5%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">45</td><td class="px-3 py-2 border-b border-gray-200">40.5%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">66</td><td class="px-3 py-2 border-b border-gray-200">59.5%</td></tr>
 </tbody></table>
@@ -2915,7 +2865,6 @@
 <ol class="pl-6">
 <li class="my-1 text-sm">Reading Exercises</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-11" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -3118,7 +3067,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:41.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">41.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:59.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">59.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:41.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">41.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:59.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">59.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">41</td><td class="px-3 py-2 border-b border-gray-200">41.0%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">59</td><td class="px-3 py-2 border-b border-gray-200">59.0%</td></tr>
 </tbody></table>
@@ -3235,14 +3184,12 @@
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">RL.11-12.10 / RI.11-12.10: No Lexile data to verify grade-level text complexity. Cannot assess whether students are reading at appropriate complexity levels.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">5 previously removed/flagged article(s) appear to have been re-added to the curriculum despite being flagged for inappropriate content.</li>
 <li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">4 article(s) with HIGH-severity content flags (severe violence, dark themes, sexual content) are currently present.</li>
-<li class="my-2.5 pl-2 text-red-900 leading-normal before:content-['\2717_'] before:font-bold before:text-red-600">2 article(s) contain text written in German instead of English: &quot;Excerpt from Death of a Salesman, Act I (Willy Loman at home; the boys return)&quot;, &quot;Excerpt from Death of a Salesman, Act II (The confrontation; Requiem)&quot;. (11 total sections affected.) These appear to be German-language summaries rather than the original English texts.</li>
 </ul></div>
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Units</h2>
 <ol class="pl-6">
 <li class="my-1 text-sm">Reading Exercises</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 <div id="grade-12" class="grade-panel" style="display:none;">
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
@@ -3446,7 +3393,7 @@
 <div class="bg-white rounded-lg p-6 mb-5 shadow-sm">
 <h2 class="text-lg font-semibold text-indigo-900 mb-4 pb-2 border-b-2 border-gray-200">Excerpt vs. Non-Excerpt</h2>
 <p class="text-xs text-gray-500 mb-3 italic">Excerpt = a portion of a longer literary work. Non-excerpt = complete or self-contained text.</p>
-<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:50.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">50.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Non-Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:50.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">50.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
+<div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Excerpt</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-red-400" style="width:50.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">50.0%</div></div><div class="flex items-center my-1"><div class="w-[60px] text-right pr-2 text-[13px] text-gray-500">Complete</div><div class="flex-1 bg-gray-200 rounded h-[22px] relative"><div class="h-full rounded min-w-[2px] transition-all duration-300 bg-blue-400" style="width:50.0%;"></div></div><div class="w-[55px] text-right pl-2 text-[13px] font-semibold">50.0%</div></div><table class="w-full border-collapse mt-3 text-sm"><thead><tr><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Type</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Count</th><th class="bg-gray-50 px-3 py-2.5 text-left font-semibold text-indigo-900 border-b-2 border-gray-300">Percentage</th></tr></thead><tbody>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Excerpt</td><td class="px-3 py-2 border-b border-gray-200">57</td><td class="px-3 py-2 border-b border-gray-200">50.0%</td></tr>
 <tr class="hover:bg-gray-50"><td class="px-3 py-2 border-b border-gray-200">Non-Excerpt</td><td class="px-3 py-2 border-b border-gray-200">57</td><td class="px-3 py-2 border-b border-gray-200">50.0%</td></tr>
 </tbody></table>
@@ -3585,7 +3532,6 @@
 <ol class="pl-6">
 <li class="my-1 text-sm">Reading Exercises</li>
 </ol></div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 
 <div id="context" class="grade-panel" style="display:none;">
@@ -3724,7 +3670,6 @@
 <tr class="hover:bg-gray-50 align-top"><td class="px-3 py-2 border-b border-gray-200"><strong class="text-sm">Excerpt from The Souls of Black Folk, Chapter 1 (&quot;Of Our Spiritual Strivings&quot;)</strong><div class="text-[11px] text-gray-400 mt-1 italic">Starts: Excerpt from The Souls of Black Folk, Chapter 1 (&amp;quot;Of Our Spiritual Strivings&amp;quot;) How Does It Feel to Be a Proble...</div></td><td class="px-3 py-2 border-b border-gray-200"><span class="text-[11px] px-2 py-0.5 rounded-full font-medium bg-teal-100 text-teal-800">Historical Primary Source</span></td><td class="px-3 py-2 border-b border-gray-200"><span class="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-medium">None</span></td><td class="px-3 py-2 border-b border-gray-200"><span class="text-sm">&#x27;Double consciousness&#x27; is a precise theoretical concept from 1903, not casual metaphor — Du Bois&#x27;s framework needs setup</span></td></tr>
 </tbody></table>
 </div>
-<div class="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-400"><span class="font-medium text-gray-500">Previous versions:</span> <a href="report_2026-04-08.html" class="text-blue-400 hover:text-blue-600 hover:underline">April 8, 2026</a></div>
 </div>
 
 </div>
